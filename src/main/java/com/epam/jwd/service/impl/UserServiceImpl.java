@@ -18,8 +18,8 @@ import com.epam.jwd.service.validation.UserValidation;
 public class UserServiceImpl implements UserService {
 
     private User user;
-    private UserRepository<Long, User> userRepository = UserRepositoryImpl.getInstance();
-    private TicketRepository<Long, Ticket> ticketRepository = TicketRepositoryImpl.getInstance();
+    private final UserRepository<Long, User> userRepository = UserRepositoryImpl.getInstance();
+    private final TicketRepository<Long, Ticket> ticketRepository = TicketRepositoryImpl.getInstance();
 
     @Override
     public void registration(User user) {
@@ -62,7 +62,6 @@ public class UserServiceImpl implements UserService {
                 && UserValidation.isEnoughCash(user, ticket.getPrice())) {
             user.addTicket(ticket);
             ticketRepository.delete(ticket);
-
         }
     }
 
