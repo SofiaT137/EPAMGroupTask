@@ -8,11 +8,23 @@ import java.util.List;
 
 public class UserRepositoryImpl implements UserRepository<Long, User> {
 
+    private static UserRepositoryImpl instance;
     private final List<User> userStorage = new ArrayList<>();
+
+    private UserRepositoryImpl() {
+    }
 
     @Override
     public void save(User user) {
         userStorage.add(user);
+    }
+
+    public static UserRepositoryImpl getInstance() {
+        if(instance == null) {
+            instance = new UserRepositoryImpl();
+        }
+
+        return instance;
     }
 
     @Override
@@ -39,5 +51,10 @@ public class UserRepositoryImpl implements UserRepository<Long, User> {
     @Override
     public boolean delete(User user) {
         return userStorage.remove(user);
+    }
+
+    @Override
+    public User findUser(User user) {
+        return userStorage.get(userStorage.indexOf(user));
     }
 }
