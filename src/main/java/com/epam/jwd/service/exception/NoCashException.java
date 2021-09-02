@@ -1,4 +1,4 @@
-package com.epam.jwd.service.exeption;
+package com.epam.jwd.service.exception;
 
 public class NoCashException extends Throwable {
 

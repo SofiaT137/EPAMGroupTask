@@ -7,10 +7,10 @@ import com.epam.jwd.repository.impl.UserRepositoryImpl;
 import com.epam.jwd.repository.model.Ticket;
 import com.epam.jwd.repository.model.User;
 import com.epam.jwd.service.api.UserService;
-import com.epam.jwd.service.exeption.NoCashException;
-import com.epam.jwd.service.exeption.UnavailableTicketException;
+import com.epam.jwd.service.exception.NoCashException;
+import com.epam.jwd.service.exception.UnavailableTicketException;
 import com.epam.jwd.service.validation.TicketValidation;
-import com.epam.jwd.service.validation.UserBalanceValidation;
+import com.epam.jwd.service.validation.UserValidation;
 
 public class UserServiceImpl implements UserService {
 
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
         Ticket ticket = ticketRepository.findByPosition(movieName, row, seat);
 
         if (TicketValidation.isAvailable(ticket)
-                && UserBalanceValidation.isEnoughCash(user, ticket.getPrice())) {
+                && UserValidation.isEnoughCash(user, ticket.getPrice())) {
             user.addTicket(ticket);
             ticketRepository.delete(ticket);
 

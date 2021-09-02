@@ -1,8 +1,8 @@
 package com.epam.jwd.service.api;
 
 import com.epam.jwd.repository.model.User;
-import com.epam.jwd.service.exeption.NoCashException;
-import com.epam.jwd.service.exeption.UnavailableTicketException;
+import com.epam.jwd.service.exception.NoCashException;
+import com.epam.jwd.service.exception.UnavailableTicketException;
 
 public interface UserService {
 
