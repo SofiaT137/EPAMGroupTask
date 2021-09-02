@@ -49,7 +49,8 @@ public class UserServiceImpl implements UserService {
             throws UnavailableTicketException, NoCashException {
         Ticket ticket = ticketRepository.findByPosition(movieName, row, seat);
 
-        if (TicketValidation.isAvailable(ticket) && UserBalanceValidation.isEnoughCash(user, ticket.getPrice())) {
+        if (TicketValidation.isAvailable(ticket)
+                && UserBalanceValidation.isEnoughCash(user, ticket.getPrice())) {
             user.addTicket(ticket);
             ticketRepository.delete(ticket);
 
