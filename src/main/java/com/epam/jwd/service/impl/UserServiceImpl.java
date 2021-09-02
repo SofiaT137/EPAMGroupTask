@@ -15,6 +15,8 @@ import com.epam.jwd.service.exception.UnavailableTicketException;
 import com.epam.jwd.service.validation.TicketValidation;
 import com.epam.jwd.service.validation.UserValidation;
 
+import java.util.List;
+
 public class UserServiceImpl implements UserService {
 
     private User user;
@@ -69,5 +71,10 @@ public class UserServiceImpl implements UserService {
     public double checkTicketPrice(String movieName, int row, int seat) {
         return ticketRepository.findByPosition(movieName, row, seat)
                 .getPrice();
+    }
+
+    @Override
+    public List<Ticket> getAvailableTickets() {
+        return ticketRepository.findAllAvailable();
     }
 }
