@@ -10,7 +10,21 @@ public class Ticket extends Entity<Long>{
     private boolean available;
     private boolean availableForKids;
 
-    public Ticket() {
+    public Ticket(String movieName, double price, int seat, boolean available, boolean availableForKids) {
+        this.movieName = movieName;
+        this.price = price;
+        this.seat = seat;
+        this.available = available;
+        this.availableForKids = availableForKids;
+    }
+
+    public Ticket(Long id, String movieName, double price, int seat, boolean available, boolean availableForKids) {
+        super(id);
+        this.movieName = movieName;
+        this.price = price;
+        this.seat = seat;
+        this.available = available;
+        this.availableForKids = availableForKids;
     }
 
     public String getMovieName() {
