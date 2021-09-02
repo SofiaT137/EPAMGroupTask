@@ -11,6 +11,7 @@ public class TicketValidation {
         if(ticket.isAvailable()) {
             return true;
         }
+
         throw new UnavailableTicketException(TICKET_UNAVAILABLE_EXCEPTION_MESSAGE);
     }
 }
