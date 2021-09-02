@@ -20,7 +20,7 @@ public class UserRepositoryImpl implements UserRepository<Long, User> {
     }
 
     public static UserRepositoryImpl getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new UserRepositoryImpl();
         }
 

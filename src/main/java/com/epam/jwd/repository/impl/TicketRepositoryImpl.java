@@ -15,7 +15,7 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
 
 
     public static TicketRepositoryImpl getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new TicketRepositoryImpl();
         }
 

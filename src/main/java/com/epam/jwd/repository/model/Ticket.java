@@ -2,7 +2,7 @@ package com.epam.jwd.repository.model;
 
 import java.util.Objects;
 
-public class Ticket extends Entity<Long>{
+public class Ticket extends Entity<Long> {
 
     private String movieName;
     private double price;

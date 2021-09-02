@@ -8,10 +8,16 @@ import java.util.List;
 public interface TicketRepository<V, T extends Entity<V>> {
 
     void save(Ticket ticket);
+
     T findById(V id);
-    T findByPosition(String movieName,int row, int seat);
+
+    T findByPosition(String movieName, int row, int seat);
+
     boolean delete(Ticket ticket);
+
     List<T> findAllAvailable();
+
     List<T> findAll();
+
     List<T> findAllAvailableTicketsForKids();
 }

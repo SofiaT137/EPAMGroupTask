@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
             throws UnavailableTicketException {
         Ticket ticket = ticketRepository.findByPosition(movieName, row, seat);
 
-        if(TicketValidation.isAvailable(ticket)) {
+        if (TicketValidation.isAvailable(ticket)) {
             this.user.addTicket(ticket);
         }
     }
