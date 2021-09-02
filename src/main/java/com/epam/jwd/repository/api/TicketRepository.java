@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface TicketRepository<V, T extends Entity<V>> {
 
-    void save(Ticket user);
-    T findById(T id);
+    void save(Ticket ticket);
+    T findById(V id);
     T findByPosition(int row, int seat);
     boolean delete(Ticket ticket);
     List<T> findAllAvailable();
