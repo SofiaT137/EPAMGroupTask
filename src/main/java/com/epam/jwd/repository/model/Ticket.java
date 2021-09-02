@@ -82,4 +82,6 @@ public class Ticket extends Entity<Long>{
                 ", availableForKids=" + availableForKids +
                 '}';
     }
+
+
 }
