@@ -68,4 +68,12 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
                 .filter(Ticket::isAvailableForKids)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<Ticket> findByMovieName(String movieName) {
+        return ticketStorage.stream()
+                .filter(ticket -> movieName.equals(ticket.getMovieName())
+                        && ticket.isAvailable())
+                .collect(Collectors.toList());
+    }
 }
