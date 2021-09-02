@@ -9,7 +9,18 @@ import java.util.stream.Collectors;
 
 public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
 
+
+    private static TicketRepositoryImpl instance;
     private final List<Ticket> ticketStorage = new ArrayList<>();
+
+
+    public static TicketRepositoryImpl getInstance() {
+        if(instance == null) {
+            instance = new TicketRepositoryImpl();
+        }
+
+        return instance;
+    }
 
     @Override
     public void save(Ticket ticket) {
@@ -25,10 +36,11 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
     }
 
     @Override
-    public Ticket findByPosition(int row, int seat) {
+    public Ticket findByPosition(String movieName, int row, int seat) {
         return ticketStorage.stream()
                 .filter(ticket -> (row == ticket.getRow())
-                        && (seat == ticket.getSeat()))
+                        && (seat == ticket.getSeat())
+                        && (movieName.equals(ticket.getMovieName())))
                 .findFirst()
                 .orElse(null);
     }
