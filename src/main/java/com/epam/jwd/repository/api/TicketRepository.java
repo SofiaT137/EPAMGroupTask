@@ -10,7 +10,7 @@ public interface TicketRepository<V, T extends Entity<V>> {
     void save(Ticket user);
     T findById(T id);
     T findByPosition(int row, int seat);
-    T delete(Ticket ticket);
+    boolean delete(Ticket ticket);
     List<T> findAllAvailable();
     List<T> findAll();
     List<T> findAllAvailableTicketsForKids();

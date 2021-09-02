@@ -9,8 +9,8 @@ import java.util.List;
 public interface UserRepository<V, T extends Entity<V>> {
 
     void save(User user);
-    T findById(T id);
+    T findById(V id);
     List<T> findAll();
     T findByUserName(String userName);
-    T delete(User user);
+    boolean delete(User user);
 }
