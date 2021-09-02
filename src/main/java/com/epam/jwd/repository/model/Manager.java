@@ -8,12 +8,6 @@ public class Manager extends Entity<Integer>{
     private String password;
     private String email;
 
-    public Manager(String name, String password, String email) {
-        this.name = name;
-        this.password = password;
-        this.email = email;
-    }
-
     public Manager(Integer id, String name, String password, String email) {
         super(id);
         this.name = name;

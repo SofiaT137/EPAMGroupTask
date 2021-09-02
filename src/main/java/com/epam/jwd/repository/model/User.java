@@ -10,14 +10,6 @@ public class User extends Entity<Long> {
     private String email;
     private String password;
 
-    public User(String name, double balance, int age, String email, String password) {
-        this.name = name;
-        this.balance = balance;
-        this.age = age;
-        this.email = email;
-        this.password = password;
-    }
-
     public User(Long id, String name, double balance, int age, String email, String password) {
         super(id);
         this.name = name;
