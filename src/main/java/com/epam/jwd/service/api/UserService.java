@@ -20,4 +20,5 @@ public interface UserService {
     void changeUserAge(int age) throws IllegalAgeException;
     void changeUserEmail(String userEmail) throws IllegalEmailException;
     List<Ticket> getAvailableTickets();
+    List<Ticket> getAvailableForKidsTickets();
 }

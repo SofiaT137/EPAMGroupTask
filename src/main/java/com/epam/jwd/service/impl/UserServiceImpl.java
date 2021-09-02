@@ -77,4 +77,9 @@ public class UserServiceImpl implements UserService {
     public List<Ticket> getAvailableTickets() {
         return ticketRepository.findAllAvailable();
     }
+
+    @Override
+    public List<Ticket> getAvailableForKidsTickets() {
+        return ticketRepository.findAllAvailableTicketsForKids();
+    }
 }
