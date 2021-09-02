@@ -1,5 +1,7 @@
 package com.epam.jwd.repository.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class User extends Entity<Long> {
@@ -8,15 +10,15 @@ public class User extends Entity<Long> {
     private double balance;
     private int age;
     private String email;
-    private String password;
+    private List<Ticket> tickets;
 
-    public User(Long id, String name, double balance, int age, String email, String password) {
+    public User(Long id, String name, double balance, int age, String email) {
         super(id);
         this.name = name;
         this.balance = balance;
         this.age = age;
         this.email = email;
-        this.password = password;
+        this.tickets = new ArrayList<>();
     }
 
     public String getName() {
@@ -51,12 +53,16 @@ public class User extends Entity<Long> {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public List<Ticket> getTickets() {
+        return tickets;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
+    }
+
+    public void addTicket(Ticket ticket) {
+        tickets.add(ticket);
     }
 
     @Override
@@ -66,14 +72,14 @@ public class User extends Entity<Long> {
         User user = (User) o;
         return Double.compare(user.balance, balance) == 0
                 && age == user.age
-                && name.equals(user.name)
-                && email.equals(user.email)
-                && password.equals(user.password);
+                && Objects.equals(name, user.name)
+                && Objects.equals(email, user.email)
+                && Objects.equals(tickets, user.tickets);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, balance, age, email, password);
+        return Objects.hash(name, balance, age, email, tickets);
     }
 
     //Replace String with StringBuilder
@@ -81,11 +87,11 @@ public class User extends Entity<Long> {
     public String toString() {
         return "User{" +
                 "id=" + super.getId() +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", balance=" + balance +
                 ", age=" + age +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                ", tickets=" + tickets +
                 '}';
     }
 }
