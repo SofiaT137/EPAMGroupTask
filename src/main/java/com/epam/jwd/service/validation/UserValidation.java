@@ -1,6 +1,9 @@
 package com.epam.jwd.service.validation;
 
 import com.epam.jwd.repository.model.User;
+import com.epam.jwd.service.exception.IllegalAgeException;
+import com.epam.jwd.service.exception.IllegalEmailException;
+import com.epam.jwd.service.exception.IllegalNameSizeException;
 import com.epam.jwd.service.exception.NoCashException;
 
 public class UserValidation {
@@ -20,27 +23,27 @@ public class UserValidation {
         throw new NoCashException(NO_CASH_EXCEPTION_MESSAGE);
     }
 
-    public static boolean isValidName(String name) {
+    public static boolean isValidName(String name) throws IllegalNameSizeException {
         if(name.length() > 0) {
             return true;
         }
 
-        throw new IllegalArgumentException(ILLEGAL_NAME_SIZE_EXCEPTION_MESSAGE);
+        throw new IllegalNameSizeException(ILLEGAL_NAME_SIZE_EXCEPTION_MESSAGE);
     }
 
-    public static boolean isPositiveAge(int age) {
+    public static boolean isPositiveAge(int age) throws IllegalAgeException {
         if(age > 0) {
             return true;
         }
 
-        throw new IllegalArgumentException(ILLEGAL_AGE_EXCEPTION_MESSAGE);
+        throw new IllegalAgeException(ILLEGAL_AGE_EXCEPTION_MESSAGE);
     }
 
-    public static boolean isEmail(String email) {
+    public static boolean isEmail(String email) throws IllegalEmailException {
         if(email.matches(EMAIL_PATTERN)) {
             return true;
         }
 
-        throw new IllegalArgumentException(ILLEGAL_EMAIL_EXCEPTION_MESSAGE);
+        throw new IllegalEmailException(ILLEGAL_EMAIL_EXCEPTION_MESSAGE);
     }
 }

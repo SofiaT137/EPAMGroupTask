@@ -7,6 +7,9 @@ import com.epam.jwd.repository.impl.UserRepositoryImpl;
 import com.epam.jwd.repository.model.Ticket;
 import com.epam.jwd.repository.model.User;
 import com.epam.jwd.service.api.UserService;
+import com.epam.jwd.service.exception.IllegalAgeException;
+import com.epam.jwd.service.exception.IllegalEmailException;
+import com.epam.jwd.service.exception.IllegalNameSizeException;
 import com.epam.jwd.service.exception.NoCashException;
 import com.epam.jwd.service.exception.UnavailableTicketException;
 import com.epam.jwd.service.validation.TicketValidation;
@@ -30,18 +33,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void changeUserName(String userName) {
-        user.setName(userName);
+    public void changeUserName(String userName) throws IllegalNameSizeException {
+        if(UserValidation.isValidName(userName)){
+            user.setName(userName);
+        }
     }
 
     @Override
-    public void changeUserAge(int age) {
-        user.setAge(age);
+    public void changeUserAge(int age) throws IllegalAgeException {
+        if(UserValidation.isPositiveAge(age)){
+            user.setAge(age);
+        }
     }
 
     @Override
-    public void changeUserEmail(String userEmail) {
-        user.setEmail(userEmail);
+    public void changeUserEmail(String userEmail) throws IllegalEmailException {
+        if(UserValidation.isEmail(userEmail)){
+            user.setEmail(userEmail);
+        }
     }
 
     @Override

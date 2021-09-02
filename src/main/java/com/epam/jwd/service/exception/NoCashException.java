@@ -17,7 +17,8 @@ public class NoCashException extends Throwable {
         super(cause);
     }
 
-    public NoCashException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    public NoCashException(String message, Throwable cause,
+                           boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }
