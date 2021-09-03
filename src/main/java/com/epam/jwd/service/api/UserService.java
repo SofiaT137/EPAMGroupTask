@@ -21,4 +21,5 @@ public interface UserService {
     void changeUserEmail(String userEmail) throws IllegalEmailException;
     List<Ticket> getAvailableTickets();
     List<Ticket> getAvailableForKidsTickets();
+    List<Ticket> getTicketsByMovieName(String movieName);
 }

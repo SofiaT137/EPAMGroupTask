@@ -82,4 +82,9 @@ public class UserServiceImpl implements UserService {
     public List<Ticket> getAvailableForKidsTickets() {
         return ticketRepository.findAllAvailableTicketsForKids();
     }
+
+    @Override
+    public List<Ticket> getTicketsByMovieName(String movieName) {
+        return ticketRepository.findByMovieName(movieName);
+    }
 }
