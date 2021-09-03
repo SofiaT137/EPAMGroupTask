@@ -14,7 +14,7 @@ import java.util.List;
 
 public class SellerServiceImpl implements SellerService {
 
-    private final TicketRepository<Long, Ticket> ticketRepository = new TicketRepositoryImpl();
+    private final TicketRepository<Long, Ticket> ticketRepository = TicketRepositoryImpl.getInstance();
     private static final int NUMBER_OF_SEATS = 5;
 
     @Override
