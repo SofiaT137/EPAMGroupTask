@@ -5,8 +5,9 @@ import com.epam.jwd.repository.model.Ticket;
 public interface TicketFactory {
 
     Ticket createHorrorMovieTicket();
-    Ticket createCartoonTicket();
+    Ticket createAdventureTicket();
     Ticket createActionMovieTicket();
-    Ticket createDramaMovieTicket();
+    Ticket createMelodramaMovieTicket();
     Ticket createComedyMovieTicket();
+    Ticket createDetectiveMovieTicket();
 }
