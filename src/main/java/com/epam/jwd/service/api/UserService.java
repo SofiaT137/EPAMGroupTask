@@ -22,4 +22,6 @@ public interface UserService {
     List<Ticket> getAvailableTickets();
     List<Ticket> getAvailableForKidsTickets();
     List<Ticket> getTicketsByMovieName(String movieName);
+    void signIn(String userName);
+    void signOut();
 }
