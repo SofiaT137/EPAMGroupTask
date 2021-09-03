@@ -13,8 +13,8 @@ import java.util.List;
 public interface UserService {
 
     void registration(User user);
-    void buyTicket(String movieName, int row, int seat) throws UnavailableTicketException, NoCashException;
-    double checkTicketPrice(String movieName, int row, int seat);
+    void buyTicket(String movieName) throws UnavailableTicketException, NoCashException;
+    double checkTicketPrice(String movieName);
     double checkBalance(String userName);
     void changeUserName(String userName) throws IllegalNameSizeException;
     void changeUserAge(int age) throws IllegalAgeException;

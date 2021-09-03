@@ -36,16 +36,6 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
     }
 
     @Override
-    public Ticket findByPosition(String movieName, int row, int seat) {
-        return ticketStorage.stream()
-                .filter(ticket -> (row == ticket.getRow())
-                        && (seat == ticket.getSeat())
-                        && (movieName.equals(ticket.getMovieName())))
-                .findFirst()
-                .orElse(null);
-    }
-
-    @Override
     public boolean delete(Ticket ticket) {
         return ticketStorage.remove(ticket);
     }
@@ -70,10 +60,10 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
     }
 
     @Override
-    public List<Ticket> findByMovieName(String movieName) {
+    public Ticket findByMovieName(String movieName) {
         return ticketStorage.stream()
                 .filter(ticket -> movieName.equals(ticket.getMovieName())
                         && ticket.isAvailable())
-                .collect(Collectors.toList());
+                .findFirst().orElse(null);
     }
 }

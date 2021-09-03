@@ -16,6 +16,8 @@ import com.epam.jwd.service.validation.TicketValidation;
 import com.epam.jwd.service.validation.UserValidation;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class UserServiceImpl implements UserService {
 
@@ -56,9 +58,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void buyTicket(String movieName, int row, int seat)
+    public void buyTicket(String movieName)
             throws UnavailableTicketException, NoCashException {
-        Ticket ticket = ticketRepository.findByPosition(movieName, row, seat);
+        Ticket ticket = ticketRepository.findByMovieName(movieName);
 
         if (TicketValidation.isAvailable(ticket)
                 && UserValidation.isEnoughCash(user, ticket.getPrice())) {
@@ -68,8 +70,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public double checkTicketPrice(String movieName, int row, int seat) {
-        return ticketRepository.findByPosition(movieName, row, seat)
+    public double checkTicketPrice(String movieName) {
+        return ticketRepository.findByMovieName(movieName)
                 .getPrice();
     }
 
@@ -85,7 +87,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Ticket> getTicketsByMovieName(String movieName) {
-        return ticketRepository.findByMovieName(movieName);
+        return ticketRepository.findAllAvailable().stream()
+                .filter(movie -> movie.getMovieName().equals(movieName))
+                .collect(Collectors.toList());
     }
 
     @Override
