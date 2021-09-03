@@ -87,4 +87,14 @@ public class UserServiceImpl implements UserService {
     public List<Ticket> getTicketsByMovieName(String movieName) {
         return ticketRepository.findByMovieName(movieName);
     }
+
+    @Override
+    public void signIn(String userName) {
+        this.user = userRepository.findByUserName(userName);
+    }
+
+    @Override
+    public void signOut() {
+        this.user = null;
+    }
 }
