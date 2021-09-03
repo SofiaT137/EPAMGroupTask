@@ -5,25 +5,16 @@ import java.util.Objects;
 public class Ticket extends Entity<Long> {
 
     private String movieName;
+    private String movieGenre;
     private double price;
-    private int seat;
-    private int row;
     private boolean available;
     private boolean availableForKids;
 
-    public Ticket(Long id, String movieName, double price, int seat, int row, boolean available, boolean availableForKids) {
-        super(id);
-        this.movieName = movieName;
-        this.price = price;
-        this.seat = seat;
-        this.row = row;
-        this.available = available;
-        this.availableForKids = availableForKids;
-    }
 
-    public Ticket(Long id, String movieName, double price, boolean available, boolean availableForKids) {
+    public Ticket(Long id, String movieName, String movieGenre, double price, boolean available, boolean availableForKids) {
         super(id);
         this.movieName = movieName;
+        this.movieGenre = movieGenre;
         this.price = price;
         this.available = available;
         this.availableForKids = availableForKids;
@@ -37,28 +28,20 @@ public class Ticket extends Entity<Long> {
         this.movieName = movieName;
     }
 
+    public String getMovieGenre() {
+        return movieGenre;
+    }
+
+    public void setMovieGenre(String movieGenre) {
+        this.movieGenre = movieGenre;
+    }
+
     public double getPrice() {
         return price;
     }
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public int getSeat() {
-        return seat;
-    }
-
-    public void setSeat(int seat) {
-        this.seat = seat;
-    }
-
-    public int getRow() {
-        return row;
-    }
-
-    public void setRow(int row) {
-        this.row = row;
     }
 
     public boolean isAvailable() {
@@ -83,16 +66,15 @@ public class Ticket extends Entity<Long> {
         if (o == null || getClass() != o.getClass()) return false;
         Ticket ticket = (Ticket) o;
         return Double.compare(ticket.price, price) == 0
-                && seat == ticket.seat
-                && row == ticket.row
                 && available == ticket.available
                 && availableForKids == ticket.availableForKids
-                && movieName.equals(ticket.movieName);
+                && movieName.equals(ticket.movieName)
+                && movieGenre.equals(ticket.movieGenre);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(movieName, price, seat, row, available, availableForKids);
+        return Objects.hash(movieName, movieGenre, price, available, availableForKids);
     }
 
     @Override
@@ -101,8 +83,7 @@ public class Ticket extends Entity<Long> {
                 "'id='" + super.getId() + "'" +
                 "movieName='" + movieName + '\'' +
                 ", price=" + price +
-                ", seat=" + seat +
-                ", row=" + row +
+                ", genre=" + movieGenre +
                 ", available=" + available +
                 ", availableForKids=" + availableForKids +
                 '}';

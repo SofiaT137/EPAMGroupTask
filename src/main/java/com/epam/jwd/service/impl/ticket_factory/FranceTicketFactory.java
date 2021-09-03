@@ -8,31 +8,31 @@ public class FranceTicketFactory implements TicketFactory {
 
     @Override
     public Ticket createHorrorMovieTicket() {
-        return new Ticket(KeyGenerator.generateId(), "Les diaboliques", 8.99, true, true);
+        return new Ticket(KeyGenerator.generateId(), "Les diaboliques", "Horror", 8.99, true, true);
     }
 
     @Override
     public Ticket createAdventureTicket() {
-        return new Ticket(KeyGenerator.generateId(), "Bear", 6.99, true, true);
+        return new Ticket(KeyGenerator.generateId(), "Bear", "Adventure", 6.99, true, true);
     }
 
     @Override
     public Ticket createActionMovieTicket() {
-        return new Ticket(KeyGenerator.generateId(), "La haine", 12.99, true, false);
+        return new Ticket(KeyGenerator.generateId(), "La haine", "Action", 12.99, true, false);
     }
 
     @Override
     public Ticket createMelodramaMovieTicket() {
-        return new Ticket(KeyGenerator.generateId(), "Lolita", 15.00, true, true);
+        return new Ticket(KeyGenerator.generateId(), "Lolita", "Melodrama", 15.00, true, true);
     }
 
     @Override
     public Ticket createComedyMovieTicket() {
-        return new Ticket(KeyGenerator.generateId(), "Presidents", 9.99, true, true);
+        return new Ticket(KeyGenerator.generateId(), "Presidents", "Comedy", 9.99, true, true);
     }
 
     @Override
     public Ticket createDetectiveMovieTicket() {
-        return new Ticket(KeyGenerator.generateId(), "Lupin", 6.99, true, false);
+        return new Ticket(KeyGenerator.generateId(), "Lupin", "Detective", 6.99, true, false);
     }
 }

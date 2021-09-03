@@ -4,6 +4,4 @@ public interface SellerService {
 
     void createUSAMovieTicketList();
     void createFranceMovieTicketList();
-    void createRussianMovieTicketList();
-    void createBestMovieTicketList();
-}
+    void createRussianMovieTicketList();}
