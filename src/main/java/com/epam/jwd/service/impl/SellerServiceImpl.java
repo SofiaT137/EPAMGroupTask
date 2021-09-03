@@ -12,7 +12,7 @@ import com.epam.jwd.service.impl.ticket_factory.USATicketFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SellerImpl implements SellerService {
+public class SellerServiceImpl implements SellerService {
 
     private final TicketRepository<Long, Ticket> ticketRepository = new TicketRepositoryImpl();
     private static final int NUMBER_OF_SEATS = 5;
