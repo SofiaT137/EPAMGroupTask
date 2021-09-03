@@ -28,7 +28,7 @@ public class FranceTicketFactory implements TicketFactory {
 
     @Override
     public Ticket createComedyMovieTicket() {
-        return new Ticket(KeyGenerator.generateId(), "presidents", 9.99, true, true);
+        return new Ticket(KeyGenerator.generateId(), "Presidents", 9.99, true, true);
     }
 
     @Override
