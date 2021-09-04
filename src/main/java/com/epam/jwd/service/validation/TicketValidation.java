@@ -15,12 +15,16 @@ public class TicketValidation {
 
     private static final String TICKET_ACCESS = "Ticket is available!";
 
+    private static final String UNAVAILABLE_TICKET = "Ticket is available!";
+
     public static boolean isAvailable(Ticket ticket) throws UnavailableTicketException {
         if (ticket.isAvailable()) {
             logger.log(Level.INFO, TICKET_ACCESS);
 
             return true;
         }
+
+        logger.log(Level.ERROR, UNAVAILABLE_TICKET);
 
         throw new UnavailableTicketException(TICKET_UNAVAILABLE_EXCEPTION_MESSAGE);
     }
