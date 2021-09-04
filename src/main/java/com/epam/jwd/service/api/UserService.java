@@ -1,5 +1,6 @@
 package com.epam.jwd.service.api;
 
+import com.epam.jwd.repository.exception.NoFindMovieException;
 import com.epam.jwd.repository.model.Ticket;
 import com.epam.jwd.repository.model.User;
 import com.epam.jwd.service.exception.IllegalAgeException;
@@ -13,8 +14,8 @@ import java.util.List;
 public interface UserService {
 
     void registration(User user);
-    void buyTicket(String movieName) throws UnavailableTicketException, NoCashException;
-    double checkTicketPrice(String movieName);
+    void buyTicket(String movieName) throws UnavailableTicketException, NoCashException, NoFindMovieException;
+    double checkTicketPrice(String movieName) throws NoFindMovieException;
     double checkBalance(String userName);
     void changeUserName(String userName) throws IllegalNameSizeException;
     void changeUserAge(int age) throws IllegalAgeException;

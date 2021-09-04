@@ -16,13 +16,13 @@ public class Controller {
         Scanner scan = new Scanner(System.in);
         System.out.println("Choose function to access to:");
 
-        while (scan.hasNextInt()){
-            function = scan.nextInt();
-            switch (function) {
-                case 1 -> {
-
-                }
-            }
-        }
+//        while (scan.hasNextInt()){
+//            function = scan.nextInt();
+//            switch (function) {
+//                case 1 -> {
+//
+//                }
+//            }
+//        }
     }
 }
