@@ -55,7 +55,7 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
 
     @Override
     public Ticket findById(Long id) {
-        logger.log(Level.DEBUG, ID_SORTING);
+        logger.log(Level.INFO, ID_SORTING);
         return ticketStorage.stream()
                 .filter(ticket -> id.equals(ticket.getId()))
                 .findFirst()
@@ -64,14 +64,14 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
 
     @Override
     public boolean delete(Ticket ticket) {
-        logger.log(Level.DEBUG, REMOVED_TICKET);
+        logger.log(Level.INFO, REMOVED_TICKET);
 
         return ticketStorage.remove(ticket);
     }
 
     @Override
     public List<Ticket> findAllAvailable() {
-        logger.log(Level.DEBUG, ALL_AVAILABLE_TICKETS);
+        logger.log(Level.INFO, ALL_AVAILABLE_TICKETS);
         return ticketStorage.stream()
                 .filter(Ticket::isAvailable)
                 .collect(Collectors.toList());
@@ -79,13 +79,13 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
 
     @Override
     public List<Ticket> findAll() {
-        logger.log(Level.DEBUG, ALL_TICKETS);
+        logger.log(Level.INFO, ALL_TICKETS);
         return ticketStorage;
     }
 
     @Override
     public List<Ticket> findAllAvailableTicketsForKids() {
-        logger.log(Level.DEBUG, ALL_AVAILABLE_TICKETS_FOR_KIDS);
+        logger.log(Level.INFO, ALL_AVAILABLE_TICKETS_FOR_KIDS);
         return ticketStorage.stream()
                 .filter(Ticket::isAvailableForKids)
                 .collect(Collectors.toList());
@@ -93,7 +93,7 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
 
     @Override
     public Ticket findByMovieName(String movieName) {
-        logger.log(Level.DEBUG, MOVIE_NAME);
+        logger.log(Level.INFO, MOVIE_NAME);
         return ticketStorage.stream()
                 .filter(ticket -> movieName.equals(ticket.getMovieName())
                         && ticket.isAvailable())

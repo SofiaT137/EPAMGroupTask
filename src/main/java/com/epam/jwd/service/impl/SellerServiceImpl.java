@@ -73,7 +73,7 @@ public class SellerServiceImpl implements SellerService {
     private void createTicket(Ticket ticket) {
         ticketRepository.save(ticket);
 
-        logger.log(Level.DEBUG, SAVE_TICKET);
+        logger.log(Level.INFO, SAVE_TICKET);
     }
 
     private void deleteTicketsByMovieName(String movieName) {
@@ -97,7 +97,7 @@ public class SellerServiceImpl implements SellerService {
             ticketList.add(factory.createMelodramaMovieTicket());
         }
 
-        logger.log(Level.DEBUG, FULL_CINEMA_HALL);
+        logger.log(Level.INFO, FULL_CINEMA_HALL);
 
         return ticketList;
     }

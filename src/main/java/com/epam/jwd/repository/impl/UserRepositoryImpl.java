@@ -50,7 +50,7 @@ public class UserRepositoryImpl implements UserRepository<Long, User> {
 
     @Override
     public User findById(Long id) {
-        logger.log(Level.DEBUG, ID_SORTING);
+        logger.log(Level.INFO, ID_SORTING);
 
         return userStorage.stream()
                 .filter(user -> id.equals(user.getId()))
@@ -65,7 +65,7 @@ public class UserRepositoryImpl implements UserRepository<Long, User> {
 
     @Override
     public User findByUserName(String userName) {
-        logger.log(Level.DEBUG, USERNAME_CHECK);
+        logger.log(Level.INFO, USERNAME_CHECK);
 
         return userStorage.stream()
                 .filter(user -> userName.equals(user.getName()))
@@ -75,14 +75,14 @@ public class UserRepositoryImpl implements UserRepository<Long, User> {
 
     @Override
     public boolean delete(User user) {
-        logger.log(Level.DEBUG, REMOVED_USER);
+        logger.log(Level.INFO, REMOVED_USER);
 
         return userStorage.remove(user);
     }
 
     @Override
     public User findUser(User user) {
-        logger.log(Level.DEBUG, USER_SEARCH);
+        logger.log(Level.INFO, USER_SEARCH);
 
         return userStorage.get(userStorage.indexOf(user));
     }

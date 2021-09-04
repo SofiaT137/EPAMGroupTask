@@ -28,23 +28,35 @@ public class UserValidation {
 
     private static final String EMAIL = "The email is valid!";
 
+    private static final String INCORRECT_EMAIL = "Email was written wrong!";
+
+    private static final String INCORRECT_AGE = "Age was written wrong!";
+
+    private static final String INCORRECT_NAME = "Name was written wrong!";
+
+    private static final String INCORRECT_CASH = "Name was written wrong!";
+
     public static boolean isEnoughCash(User user, double ticketCost)
             throws NoCashException {
         if(user.getBalance() - ticketCost >= 0) {
-            logger.log(Level.DEBUG, CASH);
+            logger.log(Level.INFO, CASH);
 
             return true;
         }
+
+        logger.log(Level.ERROR, INCORRECT_CASH);
 
         throw new NoCashException(NO_CASH_EXCEPTION_MESSAGE);
     }
 
     public static boolean isValidName(String name) throws IllegalNameSizeException {
         if(name.length() > 0) {
-            logger.log(Level.DEBUG, VALID_NAME);
+            logger.log(Level.INFO, VALID_NAME);
 
             return true;
         }
+
+        logger.log(Level.ERROR, INCORRECT_NAME);
 
         throw new IllegalNameSizeException(ILLEGAL_NAME_SIZE_EXCEPTION_MESSAGE);
     }
@@ -56,6 +68,8 @@ public class UserValidation {
             return true;
         }
 
+        logger.log(Level.ERROR, INCORRECT_AGE);
+
         throw new IllegalAgeException(ILLEGAL_AGE_EXCEPTION_MESSAGE);
     }
 
@@ -66,6 +80,9 @@ public class UserValidation {
             return true;
         }
 
+        logger.log(Level.ERROR, INCORRECT_EMAIL);
+
         throw new IllegalEmailException(ILLEGAL_EMAIL_EXCEPTION_MESSAGE);
+
     }
 }

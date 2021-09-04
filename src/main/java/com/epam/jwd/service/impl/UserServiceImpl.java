@@ -55,12 +55,12 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
         this.user = userRepository.findUser(user);
 
-        logger.log(Level.DEBUG, USER_REGISTRATION);
+        logger.log(Level.INFO, USER_REGISTRATION);
     }
 
     @Override
     public double checkBalance(String userName) {
-        logger.log(Level.DEBUG, USER_BALANCE);
+        logger.log(Level.INFO, USER_BALANCE);
 
         return user.getBalance();
     }
@@ -108,7 +108,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public double checkTicketPrice(String movieName) {
-        logger.log(Level.DEBUG, TICKET_PRICE);
+        logger.log(Level.INFO, TICKET_PRICE);
 
         return ticketRepository.findByMovieName(movieName)
                 .getPrice();
@@ -126,7 +126,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Ticket> getTicketsByMovieName(String movieName) {
-        logger.log(Level.DEBUG, MOVIE_NAME_ON_TICKET);
+        logger.log(Level.INFO, MOVIE_NAME_ON_TICKET);
 
         return ticketRepository.findAllAvailable().stream()
                 .filter(movie -> movie.getMovieName().equals(movieName))
@@ -137,13 +137,13 @@ public class UserServiceImpl implements UserService {
     public void signIn(String userName) {
         this.user = userRepository.findByUserName(userName);
 
-        logger.log(Level.DEBUG, USER_ACTIONS_IN);
+        logger.log(Level.INFO, USER_ACTIONS_IN);
     }
 
     @Override
     public void signOut() {
         this.user = null;
 
-        logger.log(Level.DEBUG, USER_ACTIONS_OUT);
+        logger.log(Level.INFO, USER_ACTIONS_OUT);
     }
 }

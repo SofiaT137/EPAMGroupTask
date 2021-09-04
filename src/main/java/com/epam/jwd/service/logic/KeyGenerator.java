@@ -16,7 +16,7 @@ public class KeyGenerator {
     private static final String USER_BALANCE = "Id will be generated!";
 
     public static Long generateId() {
-        logger.log(Level.DEBUG, USER_BALANCE);
+        logger.log(Level.INFO, USER_BALANCE);
 
         return random.nextLong();
     }
