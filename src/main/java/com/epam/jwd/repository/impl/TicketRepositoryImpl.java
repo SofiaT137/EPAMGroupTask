@@ -29,9 +29,6 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
 
     private static final String MOVIE_NAME = "Movie was found by movie name";
 
-    private static final String ALL_TICKETS = "There is search all tickets here";
-
-
 
     private static TicketRepositoryImpl instance;
     private final List<Ticket> ticketStorage = new ArrayList<>();
@@ -79,13 +76,13 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
 
     @Override
     public List<Ticket> findAll() {
-        logger.log(Level.INFO, ALL_TICKETS);
         return ticketStorage;
     }
 
     @Override
     public List<Ticket> findAllAvailableTicketsForKids() {
         logger.log(Level.INFO, ALL_AVAILABLE_TICKETS_FOR_KIDS);
+
         return ticketStorage.stream()
                 .filter(Ticket::isAvailableForKids)
                 .collect(Collectors.toList());
@@ -94,6 +91,7 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
     @Override
     public Ticket findByMovieName(String movieName) {
         logger.log(Level.INFO, MOVIE_NAME);
+
         return ticketStorage.stream()
                 .filter(ticket -> movieName.equals(ticket.getMovieName())
                         && ticket.isAvailable())

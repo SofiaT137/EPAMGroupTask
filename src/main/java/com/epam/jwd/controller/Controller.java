@@ -30,6 +30,7 @@ public class Controller {
 
         while (scan.hasNextInt()){
             logger.log(Level.INFO, FUNCTIONS);
+
             function = scan.nextInt();
             switch (function) {
                 case 1 -> {
