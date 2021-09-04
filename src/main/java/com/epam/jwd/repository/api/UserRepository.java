@@ -1,13 +1,14 @@
 package com.epam.jwd.repository.api;
 
 
+import com.epam.jwd.repository.exception.UnavailableSaveUserException;
 import com.epam.jwd.repository.model.Entity;
 
 import java.util.List;
 
 public interface UserRepository<V, T extends Entity<V>> {
 
-    void save(T user);
+    void save(T user) throws UnavailableSaveUserException;
     T findById(V id);
     T findUser(T user);
     List<T> findAll();

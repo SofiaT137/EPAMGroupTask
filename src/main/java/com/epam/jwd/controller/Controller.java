@@ -1,5 +1,6 @@
 package com.epam.jwd.controller;
 
+import com.epam.jwd.repository.exception.UnavailableSaveTicketException;
 import com.epam.jwd.service.api.SellerService;
 import com.epam.jwd.service.impl.SellerServiceImpl;
 
@@ -9,9 +10,15 @@ public class Controller {
     public static void main(String[] args) {
 
         SellerService service = new SellerServiceImpl();
-        service.createUSAMovieTicketList();
-        service.createRussianMovieTicketList();
-        service.createFranceMovieTicketList();
+        try{
+            service.createUSAMovieTicketList();
+            service.createRussianMovieTicketList();
+            service.createFranceMovieTicketList();
+        }
+        catch (UnavailableSaveTicketException exception){
+            //TODO log
+        }
+
         int function;
         Scanner scan = new Scanner(System.in);
         System.out.println("Choose function to access to:");

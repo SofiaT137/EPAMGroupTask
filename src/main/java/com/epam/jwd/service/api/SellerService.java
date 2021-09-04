@@ -1,9 +1,9 @@
 package com.epam.jwd.service.api;
 
-import com.epam.jwd.repository.exception.UnableSaveTicketException;
+import com.epam.jwd.repository.exception.UnavailableSaveTicketException;
 
 public interface SellerService {
 
-    void createUSAMovieTicketList() throws UnableSaveTicketException;
-    void createFranceMovieTicketList() throws UnableSaveTicketException;
-    void createRussianMovieTicketList() throws UnableSaveTicketException;}
+    void createUSAMovieTicketList() throws UnavailableSaveTicketException;
+    void createFranceMovieTicketList() throws UnavailableSaveTicketException;
+    void createRussianMovieTicketList() throws UnavailableSaveTicketException;}

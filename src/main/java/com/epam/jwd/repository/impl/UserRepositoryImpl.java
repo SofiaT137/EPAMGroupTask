@@ -1,6 +1,8 @@
 package com.epam.jwd.repository.impl;
 
 import com.epam.jwd.repository.api.UserRepository;
+import com.epam.jwd.repository.exception.UnavailableSaveTicketException;
+import com.epam.jwd.repository.exception.UnavailableSaveUserException;
 import com.epam.jwd.repository.model.User;
 
 import java.util.ArrayList;
@@ -10,13 +12,19 @@ public class UserRepositoryImpl implements UserRepository<Long, User> {
 
     private static UserRepositoryImpl instance;
     private final List<User> userStorage = new ArrayList<>();
+    private final static String UNAVAILABLE_SAVE_USER_EXCEPTION = "Can not save the user";
 
     private UserRepositoryImpl() {
     }
 
     @Override
-    public void save(User user) {
-        userStorage.add(user);
+    public void save(User user) throws UnavailableSaveUserException {
+        try{
+            userStorage.add(user);
+        }
+        catch (Exception exception){
+            throw new UnavailableSaveUserException(UNAVAILABLE_SAVE_USER_EXCEPTION + "( " + exception.getMessage() + " ).");
+        }
     }
 
     public static UserRepositoryImpl getInstance() {
