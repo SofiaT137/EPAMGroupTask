@@ -3,6 +3,7 @@ package com.epam.jwd.service.impl;
 import com.epam.jwd.repository.api.TicketRepository;
 import com.epam.jwd.repository.api.UserRepository;
 import com.epam.jwd.repository.exception.NoFindMovieException;
+import com.epam.jwd.repository.exception.UnavailableSaveUserException;
 import com.epam.jwd.repository.impl.TicketRepositoryImpl;
 import com.epam.jwd.repository.impl.UserRepositoryImpl;
 import com.epam.jwd.repository.model.Ticket;
@@ -33,7 +34,7 @@ public class UserServiceImpl implements UserService {
     private static final String NO_FIND_MOVIE_EXCEPTION = "This film is not found";
 
     @Override
-    public void registration(User user) {
+    public void registration(User user) throws UnavailableSaveUserException {
         userRepository.save(user);
         this.user = userRepository.findUser(user);
     }

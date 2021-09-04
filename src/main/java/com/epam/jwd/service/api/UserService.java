@@ -1,6 +1,7 @@
 package com.epam.jwd.service.api;
 
 import com.epam.jwd.repository.exception.NoFindMovieException;
+import com.epam.jwd.repository.exception.UnavailableSaveUserException;
 import com.epam.jwd.repository.model.Ticket;
 import com.epam.jwd.repository.model.User;
 import com.epam.jwd.service.exception.IllegalAgeException;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public interface UserService {
 
-    void registration(User user);
+    void registration(User user) throws UnavailableSaveUserException;
     void buyTicket(String movieName) throws UnavailableTicketException, NoCashException, NoFindMovieException;
     double checkTicketPrice(String movieName) throws NoFindMovieException;
     double checkBalance(String userName);
