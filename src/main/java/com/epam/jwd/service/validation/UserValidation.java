@@ -5,6 +5,10 @@ import com.epam.jwd.service.exception.IllegalAgeException;
 import com.epam.jwd.service.exception.IllegalEmailException;
 import com.epam.jwd.service.exception.IllegalNameSizeException;
 import com.epam.jwd.service.exception.NoCashException;
+import com.epam.jwd.service.logic.KeyGenerator;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class UserValidation {
 
@@ -14,9 +18,21 @@ public class UserValidation {
     private static final String ILLEGAL_AGE_EXCEPTION_MESSAGE = "Age should be above 0";
     private static final String ILLEGAL_EMAIL_EXCEPTION_MESSAGE = "Enter valid email address";
 
+    private static final Logger logger = LogManager.getLogger(UserValidation.class);
+
+    private static final String CASH = "The cash is enough!";
+
+    private static final String VALID_NAME = "The name is valid!";
+
+    private static final String POSITIVE_AGE = "The age is positive!";
+
+    private static final String EMAIL = "The email is valid!";
+
     public static boolean isEnoughCash(User user, double ticketCost)
             throws NoCashException {
         if(user.getBalance() - ticketCost >= 0) {
+            logger.log(Level.DEBUG, CASH);
+
             return true;
         }
 
@@ -25,6 +41,8 @@ public class UserValidation {
 
     public static boolean isValidName(String name) throws IllegalNameSizeException {
         if(name.length() > 0) {
+            logger.log(Level.DEBUG, VALID_NAME);
+
             return true;
         }
 
@@ -33,6 +51,8 @@ public class UserValidation {
 
     public static boolean isPositiveAge(int age) throws IllegalAgeException {
         if(age > 0) {
+            logger.log(Level.DEBUG, POSITIVE_AGE);
+
             return true;
         }
 
@@ -41,6 +61,8 @@ public class UserValidation {
 
     public static boolean isEmail(String email) throws IllegalEmailException {
         if(email.matches(EMAIL_PATTERN)) {
+            logger.log(Level.DEBUG, EMAIL);
+
             return true;
         }
 
