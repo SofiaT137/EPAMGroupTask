@@ -96,7 +96,9 @@ public class SellerServiceImpl implements SellerService {
             ticketList.add(factory.createDetectiveMovieTicket());
             ticketList.add(factory.createMelodramaMovieTicket());
         }
+
         logger.log(Level.DEBUG, FULL_CINEMA_HALL);
+
         return ticketList;
     }
 }
