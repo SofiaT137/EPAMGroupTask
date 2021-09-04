@@ -13,10 +13,12 @@ public class UserValidation {
     private static final String ILLEGAL_NAME_SIZE_EXCEPTION_MESSAGE = "Name must be 1 or more symbols long";
     private static final String ILLEGAL_AGE_EXCEPTION_MESSAGE = "Age should be above 0";
     private static final String ILLEGAL_EMAIL_EXCEPTION_MESSAGE = "Enter valid email address";
+    private static final int MAX_NAME_LENGTH = 30;
+    private static final int MAX_AGE = 125;
 
     public static boolean isEnoughCash(User user, double ticketCost)
             throws NoCashException {
-        if(user.getBalance() - ticketCost >= 0) {
+        if (user.getBalance() - ticketCost >= 0) {
             return true;
         }
 
@@ -24,15 +26,15 @@ public class UserValidation {
     }
 
     public static boolean isValidName(String name) throws IllegalNameSizeException {
-        if(name.length() > 0) {
+        if (name.length() > 0 && name.length() < MAX_NAME_LENGTH) {
             return true;
         }
 
         throw new IllegalNameSizeException(ILLEGAL_NAME_SIZE_EXCEPTION_MESSAGE);
     }
 
-    public static boolean isPositiveAge(int age) throws IllegalAgeException {
-        if(age > 0) {
+    public static boolean isValidAge(int age) throws IllegalAgeException {
+        if (age > 0 && age < MAX_AGE) {
             return true;
         }
 
@@ -40,7 +42,7 @@ public class UserValidation {
     }
 
     public static boolean isEmail(String email) throws IllegalEmailException {
-        if(email.matches(EMAIL_PATTERN)) {
+        if (email.matches(EMAIL_PATTERN)) {
             return true;
         }
 
