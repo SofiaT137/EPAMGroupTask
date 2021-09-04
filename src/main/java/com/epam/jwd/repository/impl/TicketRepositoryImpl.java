@@ -17,6 +17,8 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
 
     private static final String CHECK_FOR_NULL = "Instance is null";
 
+    private static final String SAVED_TICKET = "Ticket was saved!";
+
     private static final String ID_SORTING = "ID is searched";
 
     private static final String REMOVED_TICKET = "Ticket was remove!";
@@ -47,6 +49,8 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
     @Override
     public void save(Ticket ticket) {
         ticketStorage.add(ticket);
+
+        logger.log(Level.INFO, SAVED_TICKET);
     }
 
     @Override
