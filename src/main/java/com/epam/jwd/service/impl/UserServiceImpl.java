@@ -37,14 +37,11 @@ public class UserServiceImpl implements UserService {
     private static final String UNAVAILABLE_TICKET_EXCEPTION = "This ticket is not available";
     private static final String NO_FIND_MOVIE_EXCEPTION = "This film is not found";
 
-    @Override
-    public void registration(User user) throws UnavailableSaveUserException {
-
     private User user;
 
     @Override
 
-    public void registration(User user) throws UserNotFoundException {
+    public void registration(User user) throws UserNotFoundException, UnavailableSaveUserException {
         userRepository.save(user);
         this.user = userRepository.findUser(user).orElseThrow(() ->
                 new UserNotFoundException(NOT_FOUND_IN_REPOSITORY_MESSAGE));

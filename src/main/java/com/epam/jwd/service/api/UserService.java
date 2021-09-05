@@ -11,7 +11,7 @@ import java.util.List;
 public interface UserService {
 
 
-    void registration(User user) throws UserNotFoundException;
+    void registration(User user) throws UserNotFoundException, UnavailableSaveUserException;
     void buyTicket(String movieName) throws UnavailableTicketException, NoCashException, UserNotActiveException, NoFindMovieException;
     double checkTicketPrice(String movieName) throws NoFindMovieException;
     double getBalance() throws UserNotActiveException;
