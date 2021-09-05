@@ -25,7 +25,6 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
     private static final String MOVIE_NAME = "Movie was found by movie name";
 
 
-
     private static TicketRepositoryImpl instance;
     private final List<Ticket> ticketStorage = new ArrayList<>();
     private final static String UNAVAILABLE_SAVE_TICKET_EXCEPTION = "Can not save the ticket";
@@ -45,18 +44,17 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
     }
 
     @Override
-    public void save(Ticket ticket)  {
+    public void save(Ticket ticket) {
         logger.info(SAVED_TICKET);
 
-        try{
+        try {
             ticketStorage.add(ticket);
-        }
-        catch (Exception exception){
+        } catch (Exception exception) {
             logger.error(exception);
             try {
                 throw new UnavailableSaveTicketException(UNAVAILABLE_SAVE_TICKET_EXCEPTION + "( " + exception.getMessage() + " ).");
             } catch (UnavailableSaveTicketException e) {
-               logger.error(UNAVAILABLE_SAVE_TICKET_EXCEPTION, e);
+                logger.error(UNAVAILABLE_SAVE_TICKET_EXCEPTION, e);
             }
         }
     }
@@ -107,11 +105,11 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
         logger.info(MOVIE_NAME);
         logger.debug(movieName);
 
-        Ticket ticket =  ticketStorage.stream()
+        Ticket ticket = ticketStorage.stream()
                 .filter(tckt -> movieName.equals(tckt.getMovieName())
                         && tckt.isAvailable())
                 .findFirst().orElse(null);
-        if (ticket == null){
+        if (ticket == null) {
             try {
                 throw new NoFindMovieException(NO_FIND_MOVIE_EXCEPTION);
             } catch (NoFindMovieException e) {

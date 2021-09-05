@@ -34,10 +34,9 @@ public class UserRepositoryImpl implements UserRepository<Long, User> {
     public void save(User user) {
         logger.info(SAVED_USER);
 
-        try{
+        try {
             userStorage.add(user);
-        }
-        catch (Exception exception){
+        } catch (Exception exception) {
             logger.error(exception);
             try {
                 throw new UnavailableSaveUserException(UNAVAILABLE_SAVE_USER_EXCEPTION + "( " + exception.getMessage() + " ).");

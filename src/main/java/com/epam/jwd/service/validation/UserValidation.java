@@ -37,7 +37,7 @@ public class UserValidation {
         logger.debug(ticketCost);
         logger.info(CASH);
 
-        if(user.getBalance() - ticketCost < 0) {
+        if (user.getBalance() - ticketCost < 0) {
             logger.error(INCORRECT_CASH);
             throw new NoCashException(NO_CASH_EXCEPTION_MESSAGE);
 
@@ -45,43 +45,43 @@ public class UserValidation {
         return true;
     }
 
-        public static boolean isValidName (String name) {
-            logger.debug(name);
+    public static boolean isValidName(String name) {
+        logger.debug(name);
 
-            if (name.length() == 0) {
-                logger.error(INCORRECT_NAME);
+        if (name.length() == 0) {
+            logger.error(INCORRECT_NAME);
 
-                try {
-                    throw new IllegalNameSizeException(ILLEGAL_NAME_SIZE_EXCEPTION_MESSAGE);
-                } catch (IllegalNameSizeException e) {
-                    logger.error(e);
-                }
+            try {
+                throw new IllegalNameSizeException(ILLEGAL_NAME_SIZE_EXCEPTION_MESSAGE);
+            } catch (IllegalNameSizeException e) {
+                logger.error(e);
             }
-
-            logger.info(VALID_NAME);
-
-            return true;
         }
 
-        public static boolean isValidAge (int age) {
-            logger.debug(age);
+        logger.info(VALID_NAME);
 
-            if (age <= 0) {
-                logger.error(INCORRECT_AGE);
+        return true;
+    }
 
-                try {
-                    throw new IllegalAgeException(ILLEGAL_AGE_EXCEPTION_MESSAGE);
-                } catch (IllegalAgeException e) {
-                    logger.error(e);
-                }
+    public static boolean isValidAge(int age) {
+        logger.debug(age);
+
+        if (age <= 0) {
+            logger.error(INCORRECT_AGE);
+
+            try {
+                throw new IllegalAgeException(ILLEGAL_AGE_EXCEPTION_MESSAGE);
+            } catch (IllegalAgeException e) {
+                logger.error(e);
             }
-
-            logger.info(POSITIVE_AGE);
-            return true;
         }
+
+        logger.info(POSITIVE_AGE);
+        return true;
+    }
 
     public static boolean isEmail(String email) {
-        if(!email.matches(EMAIL_PATTERN)) {
+        if (!email.matches(EMAIL_PATTERN)) {
             logger.info(INCORRECT_EMAIL);
             try {
                 throw new IllegalEmailException(ILLEGAL_EMAIL_EXCEPTION_MESSAGE);
@@ -92,5 +92,5 @@ public class UserValidation {
         logger.debug(EMAIL);
         return true;
     }
-    }
+}
 

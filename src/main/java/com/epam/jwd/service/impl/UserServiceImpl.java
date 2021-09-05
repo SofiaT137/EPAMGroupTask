@@ -54,7 +54,6 @@ public class UserServiceImpl implements UserService {
     private static final String NO_FIND_MOVIE_EXCEPTION = "This film is not found";
 
 
-
     @Override
     public void registration(User user) {
         logger.info(USER_REGISTRATION);
@@ -62,7 +61,7 @@ public class UserServiceImpl implements UserService {
         try {
             userRepository.save(user);
         } catch (UnavailableSaveUserException e) {
-           logger.error(e);
+            logger.error(e);
         }
         try {
             this.user = userRepository.findUser(user).orElseThrow(() ->
@@ -99,9 +98,9 @@ public class UserServiceImpl implements UserService {
             }
         }
         try {
-            if(!UserValidation.isValidName(userName)){
-               throw new IllegalNameSizeException(ILLEGAL_NAME_SIZE_EXCEPTION_MESSAGE);
-           }
+            if (!UserValidation.isValidName(userName)) {
+                throw new IllegalNameSizeException(ILLEGAL_NAME_SIZE_EXCEPTION_MESSAGE);
+            }
         } catch (IllegalNameSizeException e) {
             logger.error(e);
         }
@@ -123,9 +122,9 @@ public class UserServiceImpl implements UserService {
         }
 
         try {
-            if(!UserValidation.isValidAge(age)){
-                 throw new IllegalAgeException(ILLEGAL_AGE_EXCEPTION_MESSAGE);
-             }
+            if (!UserValidation.isValidAge(age)) {
+                throw new IllegalAgeException(ILLEGAL_AGE_EXCEPTION_MESSAGE);
+            }
         } catch (IllegalAgeException e) {
             logger.error(e);
         }
@@ -146,7 +145,7 @@ public class UserServiceImpl implements UserService {
             }
         }
         try {
-            if(!isEmail(userEmail)){
+            if (!isEmail(userEmail)) {
                 throw new IllegalEmailException(ILLEGAL_EMAIL_EXCEPTION_MESSAGE);
             }
         } catch (IllegalEmailException e) {
@@ -178,22 +177,16 @@ public class UserServiceImpl implements UserService {
             logger.error(e);
         }
 
-        if (ticket == null){
-            try {
-                throw new NoFindMovieException(NO_FIND_MOVIE_EXCEPTION);
-            } catch (NoFindMovieException e) {
-                logger.error(e);
-            }
-        }
-        if(!TicketValidation.isAvailable(ticket)) {
+        if (!TicketValidation.isAvailable(ticket)) {
             try {
                 throw new UnavailableTicketException(UNAVAILABLE_TICKET_EXCEPTION);
             } catch (UnavailableTicketException e) {
                 logger.error(e);
             }
         }
+
         try {
-            if(!UserValidation.isEnoughCash(user,ticket.getPrice())){
+            if (!UserValidation.isEnoughCash(user, ticket.getPrice())) {
                 throw new NoCashException(NO_CASH_EXCEPTION_MESSAGE);
             }
         } catch (NoCashException e) {
@@ -213,7 +206,7 @@ public class UserServiceImpl implements UserService {
         } catch (NoFindMovieException e) {
             logger.error(e);
         }
-        if (ticket == null){
+        if (ticket == null) {
             try {
                 throw new NoFindMovieException(NO_FIND_MOVIE_EXCEPTION);
             } catch (NoFindMovieException e) {
