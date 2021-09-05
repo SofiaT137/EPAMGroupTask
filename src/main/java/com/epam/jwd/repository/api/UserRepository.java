@@ -5,13 +5,15 @@ import com.epam.jwd.repository.exception.UnavailableSaveUserException;
 import com.epam.jwd.repository.model.Entity;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserRepository<V, T extends Entity<V>> {
 
     void save(T user) throws UnavailableSaveUserException;
-    T findById(V id);
-    T findUser(T user);
+    Optional<T> findById(V id);
+    Optional<T> findUser(T user);
+
     List<T> findAll();
-    T findByUserName(String userName);
+    Optional<T> findByUserName(String userName);
     boolean delete(T user);
 }

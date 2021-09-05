@@ -7,6 +7,7 @@ import com.epam.jwd.repository.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class UserRepositoryImpl implements UserRepository<Long, User> {
 
@@ -36,11 +37,10 @@ public class UserRepositoryImpl implements UserRepository<Long, User> {
     }
 
     @Override
-    public User findById(Long id) {
+    public Optional<User> findById(Long id) {
         return userStorage.stream()
                 .filter(user -> id.equals(user.getId()))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 
     @Override
@@ -49,11 +49,10 @@ public class UserRepositoryImpl implements UserRepository<Long, User> {
     }
 
     @Override
-    public User findByUserName(String userName) {
+    public Optional<User> findByUserName(String userName) {
         return userStorage.stream()
                 .filter(user -> userName.equals(user.getName()))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 
     @Override
@@ -62,7 +61,11 @@ public class UserRepositoryImpl implements UserRepository<Long, User> {
     }
 
     @Override
-    public User findUser(User user) {
-        return userStorage.get(userStorage.indexOf(user));
+    public Optional<User> findUser(User user) {
+        int index = userStorage.indexOf(user);
+        if (index == -1) {
+            return Optional.empty();
+        }
+        return Optional.of(userStorage.get(index));
     }
 }

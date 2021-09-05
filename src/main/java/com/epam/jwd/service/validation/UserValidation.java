@@ -13,11 +13,14 @@ public class UserValidation {
     private static final String ILLEGAL_NAME_SIZE_EXCEPTION_MESSAGE = "Name must be 1 or more symbols long";
     private static final String ILLEGAL_AGE_EXCEPTION_MESSAGE = "Age should be above 0";
     private static final String ILLEGAL_EMAIL_EXCEPTION_MESSAGE = "Enter valid email address";
+    private static final int MAX_NAME_LENGTH = 30;
+    private static final int MAX_AGE = 125;
 
     public static boolean isEnoughCash(User user, double ticketCost)
             throws NoCashException {
         if(user.getBalance() - ticketCost < 0) {
             throw new NoCashException(NO_CASH_EXCEPTION_MESSAGE);
+
         }
         return true;
     }
