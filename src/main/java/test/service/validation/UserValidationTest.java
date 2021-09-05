@@ -1,7 +1,8 @@
-package com.epam.jwd.service.validation;
+package test.service.validation;
 
 import com.epam.jwd.service.exception.IllegalEmailException;
 import com.epam.jwd.service.exception.IllegalNameSizeException;
+import com.epam.jwd.service.validation.UserValidation;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

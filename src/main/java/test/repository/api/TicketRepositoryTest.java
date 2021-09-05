@@ -1,5 +1,7 @@
-package com.epam.jwd.repository.api;
+package test.repository.api;
 
+import com.epam.jwd.repository.exception.NoFindMovieException;
+import com.epam.jwd.repository.exception.UnavailableSaveTicketException;
 import com.epam.jwd.repository.impl.TicketRepositoryImpl;
 import com.epam.jwd.repository.impl.UserRepositoryImpl;
 import com.epam.jwd.repository.model.Ticket;
@@ -28,7 +30,7 @@ class TicketRepositoryTest {
     }
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws UnavailableSaveTicketException {
         ticket = new Ticket(ID, NAME, "Melodrama", 14.00, true, true);
         repository.save(ticket);
     }
@@ -50,12 +52,12 @@ class TicketRepositoryTest {
     }
 
     @Test
-    void shouldFindTicketByNameWhenNameExists() {
+    void shouldFindTicketByNameWhenNameExists() throws NoFindMovieException {
         assertSame(ticket, repository.findByMovieName(NAME));
     }
 
     @Test
-    void shouldReturnNullWhenNameDoesNotExist() {
+    void shouldReturnNullWhenNameDoesNotExist() throws NoFindMovieException {
         storage.clear();
         assertNull(repository.findByMovieName(NAME));
     }

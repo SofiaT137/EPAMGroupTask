@@ -1,5 +1,6 @@
-package com.epam.jwd.repository.api;
+package test.repository.api;
 
+import com.epam.jwd.repository.exception.UnavailableSaveUserException;
 import com.epam.jwd.repository.impl.UserRepositoryImpl;
 import com.epam.jwd.repository.model.User;
 import org.junit.jupiter.api.*;
@@ -24,8 +25,8 @@ class UserRepositoryTest {
     }
 
     @BeforeEach
-    void setUp() {
-        user = new User(ID, NAME, 100, 20, "jack@mail.ru");
+    void setUp() throws UnavailableSaveUserException {
+        user = new User(ID, NAME, 100, 20, "jack@mail.ru", true);
         repository.save(user);
     }
 

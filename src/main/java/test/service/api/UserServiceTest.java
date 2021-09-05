@@ -1,11 +1,15 @@
-package com.epam.jwd.service.api;
+package test.service.api;
 
+import com.epam.jwd.repository.exception.NoFindMovieException;
+import com.epam.jwd.repository.exception.UnavailableSaveUserException;
 import com.epam.jwd.repository.impl.TicketRepositoryImpl;
 import com.epam.jwd.repository.impl.UserRepositoryImpl;
 import com.epam.jwd.repository.model.Ticket;
 import com.epam.jwd.repository.model.User;
 import com.epam.jwd.service.exception.NoCashException;
 import com.epam.jwd.service.exception.UnavailableTicketException;
+import com.epam.jwd.service.exception.UserNotActiveException;
+import com.epam.jwd.service.exception.UserNotFoundException;
 import com.epam.jwd.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,9 +33,9 @@ class UserServiceTest {
     }
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws UserNotFoundException, UnavailableSaveUserException {
         service = new UserServiceImpl();
-        validUser = new User(0L, "Jack", 100, 20, "jack@mail.ru");
+        validUser = new User(0L, "Jack", 100, 20, "jack@mail.ru", true);
         service.registration(validUser);
     }
 
@@ -43,7 +47,7 @@ class UserServiceTest {
 
     @Test
     void shouldBuyTicketWhenTheFilmExistsAndEnoughCash()
-            throws UnavailableTicketException, NoCashException {
+            throws UnavailableTicketException, NoCashException, UserNotActiveException, NoFindMovieException {
         String filmName = "Titanic";
         double price = 14.00;
         double expectedCash = validUser.getBalance() - price;
@@ -66,8 +70,8 @@ class UserServiceTest {
     }
 
     @Test
-    void shouldThrowNoCashExceptionWhenTheUserDoesNotHaveEnoughCash() {
-        User poorUser = new User(0L, "Jack", 0, 20, "jack@mail.ru");
+    void shouldThrowNoCashExceptionWhenTheUserDoesNotHaveEnoughCash() throws UserNotFoundException, UnavailableSaveUserException {
+        User poorUser = new User(0L, "Jack", 0, 20, "jack@mail.ru", true);
         service.registration(poorUser);
         String filmName = "Titanic";
         Ticket ticket =
