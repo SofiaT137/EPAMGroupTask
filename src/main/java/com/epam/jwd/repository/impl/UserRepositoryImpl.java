@@ -31,14 +31,19 @@ public class UserRepositoryImpl implements UserRepository<Long, User> {
     }
 
     @Override
-    public void save(User user) throws UnavailableSaveUserException {
+    public void save(User user) {
         logger.log(Level.INFO, SAVED_USER);
 
         try{
             userStorage.add(user);
         }
         catch (Exception exception){
-            throw new UnavailableSaveUserException(UNAVAILABLE_SAVE_USER_EXCEPTION + "( " + exception.getMessage() + " ).");
+            logger.log(Level.ERROR, exception);
+            try {
+                throw new UnavailableSaveUserException(UNAVAILABLE_SAVE_USER_EXCEPTION + "( " + exception.getMessage() + " ).");
+            } catch (UnavailableSaveUserException e) {
+                logger.log(Level.ERROR, e);
+            }
         }
     }
 

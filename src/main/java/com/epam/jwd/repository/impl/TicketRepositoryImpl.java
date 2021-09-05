@@ -36,6 +36,7 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
 
     public static TicketRepositoryImpl getInstance() {
         if (instance == null) {
+            logger.log(Level.INFO, CHECK_FOR_NULL);
             instance = new TicketRepositoryImpl();
         }
 
@@ -43,13 +44,18 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
     }
 
     @Override
-    public void save(Ticket ticket) throws UnavailableSaveTicketException {
+    public void save(Ticket ticket)  {
         logger.log(Level.INFO, SAVED_TICKET);
         try{
             ticketStorage.add(ticket);
         }
         catch (Exception exception){
-            throw new UnavailableSaveTicketException(UNAVAILABLE_SAVE_TICKET_EXCEPTION + "( " + exception.getMessage() + " ).");
+            logger.log(Level.ERROR, exception);
+            try {
+                throw new UnavailableSaveTicketException(UNAVAILABLE_SAVE_TICKET_EXCEPTION + "( " + exception.getMessage() + " ).");
+            } catch (UnavailableSaveTicketException e) {
+               logger.log(Level.ERROR, e);
+            }
         }
     }
 
@@ -95,7 +101,7 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
     }
 
     @Override
-    public Ticket findByMovieName(String movieName) throws NoFindMovieException {
+    public Ticket findByMovieName(String movieName) {
         logger.log(Level.INFO, MOVIE_NAME);
         logger.log(Level.DEBUG, movieName);
 
@@ -104,7 +110,11 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
                         && tckt.isAvailable())
                 .findFirst().orElse(null);
         if (ticket == null){
-            throw new NoFindMovieException(NO_FIND_MOVIE_EXCEPTION);
+            try {
+                throw new NoFindMovieException(NO_FIND_MOVIE_EXCEPTION);
+            } catch (NoFindMovieException e) {
+                logger.log(Level.ERROR, e);
+            }
         }
         return ticket;
     }

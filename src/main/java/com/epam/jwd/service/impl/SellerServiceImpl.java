@@ -34,7 +34,7 @@ public class SellerServiceImpl implements SellerService {
     private static final int NUMBER_OF_SEATS = 5;
 
     @Override
-    public void createUSAMovieTicketList() throws UnavailableSaveTicketException {
+    public void createUSAMovieTicketList() {
         TicketFactory factory = new USATicketFactory();
         createTicketList(fillCinemaHall(factory));
 
@@ -42,7 +42,7 @@ public class SellerServiceImpl implements SellerService {
     }
 
     @Override
-    public void createFranceMovieTicketList() throws UnavailableSaveTicketException {
+    public void createFranceMovieTicketList() {
         TicketFactory factory = new FranceTicketFactory();
         createTicketList(fillCinemaHall(factory));
 
@@ -50,16 +50,20 @@ public class SellerServiceImpl implements SellerService {
     }
 
     @Override
-    public void createRussianMovieTicketList() throws UnavailableSaveTicketException {
+    public void createRussianMovieTicketList() {
         TicketFactory factory = new RussianTicketFactory();
         createTicketList(fillCinemaHall(factory));
 
         logger.log(Level.INFO, RUSSIAN_MOVIE_TICKETS);
     }
 
-    private void createTicketList(List<Ticket> listOfTickets) throws UnavailableSaveTicketException {
+    private void createTicketList(List<Ticket> listOfTickets) {
         for (Ticket ticket : listOfTickets) {
-            ticketRepository.save(ticket);
+            try {
+                ticketRepository.save(ticket);
+            } catch (UnavailableSaveTicketException e) {
+                logger.log(Level.ERROR, e);
+            }
 
             logger.log(Level.DEBUG, ticket);
         }
@@ -67,8 +71,12 @@ public class SellerServiceImpl implements SellerService {
         logger.log(Level.INFO, MOVIE_TICKETS);
     }
 
-    private void createTicket(Ticket ticket) throws UnavailableSaveTicketException {
-        ticketRepository.save(ticket);
+    private void createTicket(Ticket ticket) {
+        try {
+            ticketRepository.save(ticket);
+        } catch (UnavailableSaveTicketException e) {
+            logger.log(Level.ERROR, e);
+        }
 
         logger.log(Level.INFO, SAVE_TICKET);
     }
