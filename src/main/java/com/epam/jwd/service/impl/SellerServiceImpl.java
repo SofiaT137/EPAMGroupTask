@@ -2,6 +2,7 @@ package com.epam.jwd.service.impl;
 
 
 import com.epam.jwd.repository.api.TicketRepository;
+import com.epam.jwd.repository.exception.UnavailableSaveTicketException;
 import com.epam.jwd.repository.impl.TicketRepositoryImpl;
 import com.epam.jwd.repository.model.Ticket;
 import com.epam.jwd.service.api.SellerService;
@@ -33,7 +34,7 @@ public class SellerServiceImpl implements SellerService {
     private static final int NUMBER_OF_SEATS = 5;
 
     @Override
-    public void createUSAMovieTicketList() {
+    public void createUSAMovieTicketList() throws UnavailableSaveTicketException {
         TicketFactory factory = new USATicketFactory();
         createTicketList(fillCinemaHall(factory));
 
@@ -41,7 +42,7 @@ public class SellerServiceImpl implements SellerService {
     }
 
     @Override
-    public void createFranceMovieTicketList() {
+    public void createFranceMovieTicketList() throws UnavailableSaveTicketException {
         TicketFactory factory = new FranceTicketFactory();
         createTicketList(fillCinemaHall(factory));
 
@@ -49,14 +50,14 @@ public class SellerServiceImpl implements SellerService {
     }
 
     @Override
-    public void createRussianMovieTicketList() {
+    public void createRussianMovieTicketList() throws UnavailableSaveTicketException {
         TicketFactory factory = new RussianTicketFactory();
         createTicketList(fillCinemaHall(factory));
 
         logger.log(Level.INFO, RUSSIAN_MOVIE_TICKETS);
     }
 
-    private void createTicketList(List<Ticket> listOfTickets) {
+    private void createTicketList(List<Ticket> listOfTickets) throws UnavailableSaveTicketException {
         for (Ticket ticket : listOfTickets) {
             ticketRepository.save(ticket);
 
@@ -66,7 +67,7 @@ public class SellerServiceImpl implements SellerService {
         logger.log(Level.INFO, MOVIE_TICKETS);
     }
 
-    private void createTicket(Ticket ticket) {
+    private void createTicket(Ticket ticket) throws UnavailableSaveTicketException {
         ticketRepository.save(ticket);
 
         logger.log(Level.INFO, SAVE_TICKET);

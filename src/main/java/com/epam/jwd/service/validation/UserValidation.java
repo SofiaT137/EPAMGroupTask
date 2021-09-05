@@ -5,7 +5,7 @@ import com.epam.jwd.service.exception.IllegalAgeException;
 import com.epam.jwd.service.exception.IllegalEmailException;
 import com.epam.jwd.service.exception.IllegalNameSizeException;
 import com.epam.jwd.service.exception.NoCashException;
-import com.epam.jwd.service.logic.KeyGenerator;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,6 +17,8 @@ public class UserValidation {
     private static final String ILLEGAL_NAME_SIZE_EXCEPTION_MESSAGE = "Name must be 1 or more symbols long";
     private static final String ILLEGAL_AGE_EXCEPTION_MESSAGE = "Age should be above 0";
     private static final String ILLEGAL_EMAIL_EXCEPTION_MESSAGE = "Enter valid email address";
+    private static final int MAX_NAME_LENGTH = 30;
+    private static final int MAX_AGE = 125;
 
     private static final Logger logger = LogManager.getLogger(UserValidation.class);
 
@@ -45,59 +47,46 @@ public class UserValidation {
         }
 
         return false;
+    public static boolean isEnoughCash(User user, double ticketCost)
+            throws NoCashException {
+        if(user.getBalance() - ticketCost < 0) {
+            throw new NoCashException(NO_CASH_EXCEPTION_MESSAGE);
+
+        }
+        return true;
     }
 
-    public static boolean isValidName(String name) {
-        logger.log(Level.DEBUG, name);
+    public static boolean isValidName(String name) throws IllegalNameSizeException {
+            logger.log(Level.DEBUG, name);
 
-        if(name.length() > 0) {
-            logger.log(Level.INFO, VALID_NAME);
+        if(name.length() == 0) {
+            logger.log(Level.ERROR, INCORRECT_NAME);//TODO
 
-            return true;
-        }
-
-        try {
             throw new IllegalNameSizeException(ILLEGAL_NAME_SIZE_EXCEPTION_MESSAGE);
-        } catch (IllegalNameSizeException e) {
-            logger.log(Level.ERROR, INCORRECT_NAME);
         }
-
-        return false;
+        return true;
     }
 
-    public static boolean isPositiveAge(int age) {
-        logger.log(Level.DEBUG, age);
+    public static boolean isValidAge(int age) throws IllegalAgeException {
+            logger.log(Level.DEBUG, age);
 
-        if(age > 0) {
-            logger.log(Level.DEBUG, POSITIVE_AGE);
-
-            return true;
-        }
-
-        try {
-            throw new IllegalAgeException(ILLEGAL_AGE_EXCEPTION_MESSAGE);
-        } catch (IllegalAgeException e) {
+        if(age <= 0) {
             logger.log(Level.ERROR, INCORRECT_AGE);
-        }
 
-        return false;
+            throw new IllegalAgeException(ILLEGAL_AGE_EXCEPTION_MESSAGE);
+        }
+        return true;
     }
 
-    public static boolean isEmail(String email) {
-        logger.log(Level.DEBUG, email);
+    public static boolean isEmail(String email) throws IllegalEmailException {
+        if(!email.matches(EMAIL_PATTERN)) {
+            logger.log(Level.ERROR, INCORRECT_EMAIL);
 
-        if(email.matches(EMAIL_PATTERN)) {
+            throw new IllegalEmailException(ILLEGAL_EMAIL_EXCEPTION_MESSAGE);
+        }
+
             logger.log(Level.DEBUG, EMAIL);
 
-            return true;
-        }
-
-        try {
-            throw new IllegalEmailException(ILLEGAL_EMAIL_EXCEPTION_MESSAGE);
-        } catch (IllegalEmailException e) {
-            logger.log(Level.ERROR, INCORRECT_EMAIL);
-        }
-
-        return false;
+        return true;
     }
 }

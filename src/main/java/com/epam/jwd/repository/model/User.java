@@ -11,14 +11,17 @@ public class User extends Entity<Long> {
     private int age;
     private String email;
     private List<Ticket> tickets;
+    private boolean isActive;
 
-    public User(Long id, String name, double balance, int age, String email) {
+
+    public User(Long id, String name, double balance, int age, String email, boolean isActive) {
         super(id);
         this.name = name;
         this.balance = balance;
         this.age = age;
         this.email = email;
         this.tickets = new ArrayList<>();
+        this.isActive = isActive;
     }
 
     public String getName() {
@@ -27,6 +30,14 @@ public class User extends Entity<Long> {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     public double getBalance() {
@@ -70,28 +81,29 @@ public class User extends Entity<Long> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Double.compare(user.balance, balance) == 0
-                && age == user.age
-                && Objects.equals(name, user.name)
-                && Objects.equals(email, user.email)
-                && Objects.equals(tickets, user.tickets);
+        return Double.compare(user.balance, balance) == 0 &&
+                age == user.age && isActive == user.isActive &&
+                Objects.equals(name, user.name) && Objects.equals(email, user.email) &&
+                Objects.equals(tickets, user.tickets);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, balance, age, email, tickets);
+        return Objects.hash(name, balance, age, email, tickets, isActive);
     }
 
     //Replace String with StringBuilder
+
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + super.getId() +
-                "name='" + name + '\'' +
-                ", balance=" + balance +
-                ", age=" + age +
-                ", email='" + email + '\'' +
-                ", tickets=" + tickets +
-                '}';
+        final StringBuilder sb = new StringBuilder("User{");
+        sb.append("name='").append(name).append('\'');
+        sb.append(", balance=").append(balance);
+        sb.append(", age=").append(age);
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", tickets=").append(tickets);
+        sb.append(", isActive=").append(isActive);
+        sb.append('}');
+        return sb.toString();
     }
 }

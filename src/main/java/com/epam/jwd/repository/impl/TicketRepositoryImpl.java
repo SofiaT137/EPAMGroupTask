@@ -1,7 +1,8 @@
 package com.epam.jwd.repository.impl;
 
-
 import com.epam.jwd.repository.api.TicketRepository;
+import com.epam.jwd.repository.exception.NoFindMovieException;
+import com.epam.jwd.repository.exception.UnavailableSaveTicketException;
 import com.epam.jwd.repository.model.Ticket;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -24,13 +25,17 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
     private static final String MOVIE_NAME = "Movie was found by movie name";
 
 
+
     private static TicketRepositoryImpl instance;
     private final List<Ticket> ticketStorage = new ArrayList<>();
+    private final static String UNAVAILABLE_SAVE_TICKET_EXCEPTION = "Can not save the ticket";
+    private final static String NO_FIND_MOVIE_EXCEPTION = "This film is not found";
 
+    private TicketRepositoryImpl() {
+    }
 
     public static TicketRepositoryImpl getInstance() {
         if (instance == null) {
-            logger.log(Level.INFO, CHECK_FOR_NULL);
             instance = new TicketRepositoryImpl();
         }
 
@@ -38,10 +43,14 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
     }
 
     @Override
-    public void save(Ticket ticket) {
-        ticketStorage.add(ticket);
-
+    public void save(Ticket ticket) throws UnavailableSaveTicketException {
         logger.log(Level.INFO, SAVED_TICKET);
+        try{
+            ticketStorage.add(ticket);
+        }
+        catch (Exception exception){
+            throw new UnavailableSaveTicketException(UNAVAILABLE_SAVE_TICKET_EXCEPTION + "( " + exception.getMessage() + " ).");
+        }
     }
 
     @Override
@@ -86,13 +95,17 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
     }
 
     @Override
-    public Ticket findByMovieName(String movieName) {
+    public Ticket findByMovieName(String movieName) throws NoFindMovieException {
         logger.log(Level.INFO, MOVIE_NAME);
         logger.log(Level.DEBUG, movieName);
 
-        return ticketStorage.stream()
-                .filter(ticket -> movieName.equals(ticket.getMovieName())
-                        && ticket.isAvailable())
+        Ticket ticket =  ticketStorage.stream()
+                .filter(tckt -> movieName.equals(tckt.getMovieName())
+                        && tckt.isAvailable())
                 .findFirst().orElse(null);
+        if (ticket == null){
+            throw new NoFindMovieException(NO_FIND_MOVIE_EXCEPTION);
+        }
+        return ticket;
     }
 }
