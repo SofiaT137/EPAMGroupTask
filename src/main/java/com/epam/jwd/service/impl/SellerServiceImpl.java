@@ -27,10 +27,9 @@ public class SellerServiceImpl implements SellerService {
     private static final String SAVE_TICKET = "Ticket was saved!";
     private static final String MOVIE_NAME_TICKET = "Ticket was deleted by movie name!";
     private static final String FULL_CINEMA_HALL = "Cinema hall was full";
-
+    private static final int NUMBER_OF_SEATS = 5;
 
     private final TicketRepository<Long, Ticket> ticketRepository = TicketRepositoryImpl.getInstance();
-    private static final int NUMBER_OF_SEATS = 5;
 
     @Override
     public void createUSAMovieTicketList() {

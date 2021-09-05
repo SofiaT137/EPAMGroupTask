@@ -35,16 +35,10 @@ public class UserServiceImpl implements UserService {
     private static final String MOVIE_NAME_ON_TICKET = "Tickets will be sorted by movie name!";
     private static final String USER_ACTIONS_IN = "User signed in!";
     private static final String USER_ACTIONS_OUT = "User signed out!";
-
-    private User user;
     private static final String NOT_FOUND_MESSAGE_TEMPLATE = "User not found: ";
     private static final String NOT_FOUND_IN_REPOSITORY_MESSAGE = NOT_FOUND_MESSAGE_TEMPLATE + "User not found in repository.";
     private static final String NOT_FOUND_USERNAME_MESSAGE = NOT_FOUND_MESSAGE_TEMPLATE + "Not found user name : ";
     private static final String NOT_ACTIVE_MESSAGE = "User not active: ";
-
-    private final UserRepository<Long, User> userRepository = UserRepositoryImpl.getInstance();
-    private final TicketRepository<Long, Ticket> ticketRepository = TicketRepositoryImpl.getInstance();
-
     private static final String NO_CASH_EXCEPTION_MESSAGE = "There is no money in your pocket to buy this ticket";
     private static final String ILLEGAL_NAME_SIZE_EXCEPTION_MESSAGE = "Name must be 1 or more symbols long";
     private static final String ILLEGAL_AGE_EXCEPTION_MESSAGE = "Age should be above 0";
@@ -52,6 +46,9 @@ public class UserServiceImpl implements UserService {
     private static final String UNAVAILABLE_TICKET_EXCEPTION = "This ticket is not available";
     private static final String NO_FIND_MOVIE_EXCEPTION = "This film is not found";
 
+    private User user;
+    private final UserRepository<Long, User> userRepository = UserRepositoryImpl.getInstance();
+    private final TicketRepository<Long, Ticket> ticketRepository = TicketRepositoryImpl.getInstance();
 
     @Override
     public void registration(User user) {
@@ -63,13 +60,13 @@ public class UserServiceImpl implements UserService {
             logger.error(e);
         }
         try {
-            this.user = userRepository.findUser(user).orElseThrow(() ->
+            this.user = userRepository.findUser(user)
+                    .orElseThrow(() ->
                     new UserNotFoundException(NOT_FOUND_IN_REPOSITORY_MESSAGE));
         } catch (UserNotFoundException e) {
             logger.error(e);
         }
         this.user.setActive(true);
-
     }
 
 
