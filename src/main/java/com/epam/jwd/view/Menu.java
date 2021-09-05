@@ -29,6 +29,13 @@ public class Menu {
             3.Change email
             4.Back
             """;
+    private static final String MOVIE_NAME = "Movie name: ";
+    private static final String GENRE = "Genre: ";
+    private static final String PRICE = "Price: ";
+    private static final String AVAILABLE_FOR_KIDS = "Allowed for children";
+    private static final String NOT_AVAILABLE_FOR_KIDS = "Not allowed for children";
+    private static final String TICKETS_AVAILABLE = "Tickets available";
+    private static final String TICKETS_NOT_AVAILABLE = "Tickets not available";
 
     public static void getProfileSettingsMenu() {
         System.out.println(MENU_PROFILE_SETTINGS);
@@ -64,31 +71,31 @@ public class Menu {
     }
 
     public static void getMessageMovieName(String movieName) {
-        System.out.println("Movie name: ");
+        System.out.println(MOVIE_NAME);
     }
 
     public static void getMessageMovieGenre(String genre) {
-        System.out.println("Genre: ");
+        System.out.println(GENRE);
     }
 
     public static void getMessageMoviePrice(double price) {
-        System.out.println("Price: ");
+        System.out.println(PRICE);
     }
 
     public static void getMessageAvailableForKids() {
-        System.out.println("Allowed for children");
+        System.out.println(AVAILABLE_FOR_KIDS);
     }
 
     public static void getMessageNotAvailableForKids() {
-        System.out.println("Not allowed for children");
+        System.out.println(NOT_AVAILABLE_FOR_KIDS);
     }
 
     public static void getMessageAvailableTickets() {
-        System.out.println("Tickets available");
+        System.out.println(TICKETS_AVAILABLE);
     }
 
     public static void getMessageNotAvailableTickets() {
-        System.out.println("Tickets not available");
+        System.out.println(TICKETS_NOT_AVAILABLE);
     }
 
     public static void getMessageInputUserName() {
