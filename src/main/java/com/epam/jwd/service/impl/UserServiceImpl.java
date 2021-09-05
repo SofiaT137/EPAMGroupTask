@@ -12,7 +12,6 @@ import com.epam.jwd.service.api.UserService;
 import com.epam.jwd.service.exception.*;
 import com.epam.jwd.service.validation.TicketValidation;
 import com.epam.jwd.service.validation.UserValidation;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

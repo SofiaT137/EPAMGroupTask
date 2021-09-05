@@ -10,7 +10,6 @@ import com.epam.jwd.service.api.TicketFactory;
 import com.epam.jwd.service.impl.ticket_factory.FranceTicketFactory;
 import com.epam.jwd.service.impl.ticket_factory.RussianTicketFactory;
 import com.epam.jwd.service.impl.ticket_factory.USATicketFactory;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

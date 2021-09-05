@@ -6,7 +6,6 @@ import com.epam.jwd.service.exception.IllegalEmailException;
 import com.epam.jwd.service.exception.IllegalNameSizeException;
 import com.epam.jwd.service.exception.NoCashException;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
