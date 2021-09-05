@@ -25,7 +25,7 @@ public class UserValidation {
     private static final String INCORRECT_EMAIL = "Email was written wrong!";
     private static final String INCORRECT_AGE = "Age was written wrong!";
     private static final String INCORRECT_NAME = "Name was written wrong!";
-    private static final String INCORRECT_CASH = "Name was written wrong!";
+    private static final String INCORRECT_CASH = "Cash is incorrect!";
 
 
     public static boolean isEnoughCash(User user, double ticketCost)
