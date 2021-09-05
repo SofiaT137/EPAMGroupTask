@@ -1,6 +1,8 @@
 package com.epam.jwd.repository.impl;
 
 import com.epam.jwd.repository.api.TicketRepository;
+import com.epam.jwd.repository.exception.NoFindMovieException;
+import com.epam.jwd.repository.exception.UnavailableSaveTicketException;
 import com.epam.jwd.repository.model.Ticket;
 
 import java.util.ArrayList;
@@ -12,19 +14,24 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
 
     private static TicketRepositoryImpl instance;
     private final List<Ticket> ticketStorage = new ArrayList<>();
+    private final static String UNAVAILABLE_SAVE_TICKET_EXCEPTION = "Can not save the ticket";
 
 
     public static TicketRepositoryImpl getInstance() {
         if (instance == null) {
             instance = new TicketRepositoryImpl();
         }
-
         return instance;
     }
 
     @Override
-    public void save(Ticket ticket) {
-        ticketStorage.add(ticket);
+    public void save(Ticket ticket) throws UnavailableSaveTicketException {
+        try{
+            ticketStorage.add(ticket);
+        }
+        catch (Exception exception){
+            throw new UnavailableSaveTicketException(UNAVAILABLE_SAVE_TICKET_EXCEPTION + "( " + exception.getMessage() + " ).");
+        }
     }
 
     @Override
@@ -60,7 +67,7 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
     }
 
     @Override
-    public Ticket findByMovieName(String movieName) {
+    public Ticket findByMovieName(String movieName) throws NoFindMovieException {
         return ticketStorage.stream()
                 .filter(ticket -> movieName.equals(ticket.getMovieName())
                         && ticket.isAvailable())

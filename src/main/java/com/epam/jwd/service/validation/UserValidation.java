@@ -18,34 +18,31 @@ public class UserValidation {
 
     public static boolean isEnoughCash(User user, double ticketCost)
             throws NoCashException {
-        if (user.getBalance() - ticketCost >= 0) {
-            return true;
-        }
+        if(user.getBalance() - ticketCost < 0) {
+            throw new NoCashException(NO_CASH_EXCEPTION_MESSAGE);
 
-        throw new NoCashException(NO_CASH_EXCEPTION_MESSAGE);
+        }
+        return true;
     }
 
     public static boolean isValidName(String name) throws IllegalNameSizeException {
-        if (name.length() > 0 && name.length() < MAX_NAME_LENGTH) {
-            return true;
+        if(name.length() == 0) {
+            throw new IllegalNameSizeException(ILLEGAL_NAME_SIZE_EXCEPTION_MESSAGE);
         }
-
-        throw new IllegalNameSizeException(ILLEGAL_NAME_SIZE_EXCEPTION_MESSAGE);
+        return true;
     }
 
-    public static boolean isValidAge(int age) throws IllegalAgeException {
-        if (age > 0 && age < MAX_AGE) {
-            return true;
+    public static boolean isPositiveAge(int age) throws IllegalAgeException {
+        if(age <= 0) {
+            throw new IllegalAgeException(ILLEGAL_AGE_EXCEPTION_MESSAGE);
         }
-
-        throw new IllegalAgeException(ILLEGAL_AGE_EXCEPTION_MESSAGE);
+        return true;
     }
 
     public static boolean isEmail(String email) throws IllegalEmailException {
-        if (email.matches(EMAIL_PATTERN)) {
-            return true;
+        if(!email.matches(EMAIL_PATTERN)) {
+            throw new IllegalEmailException(ILLEGAL_EMAIL_EXCEPTION_MESSAGE);
         }
-
-        throw new IllegalEmailException(ILLEGAL_EMAIL_EXCEPTION_MESSAGE);
+        return true;
     }
 }
