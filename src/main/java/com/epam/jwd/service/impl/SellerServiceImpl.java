@@ -1,6 +1,6 @@
 package com.epam.jwd.service.impl;
 
-import com.epam.jwd.controller.Controller;
+
 import com.epam.jwd.repository.api.TicketRepository;
 import com.epam.jwd.repository.impl.TicketRepositoryImpl;
 import com.epam.jwd.repository.model.Ticket;

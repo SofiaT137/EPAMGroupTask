@@ -1,6 +1,6 @@
 package com.epam.jwd.repository.impl;
 
-import com.epam.jwd.controller.Controller;
+
 import com.epam.jwd.repository.api.TicketRepository;
 import com.epam.jwd.repository.model.Ticket;
 import org.apache.logging.log4j.Level;

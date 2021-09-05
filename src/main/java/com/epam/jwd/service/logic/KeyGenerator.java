@@ -1,6 +1,6 @@
 package com.epam.jwd.service.logic;
 
-import com.epam.jwd.service.impl.SellerServiceImpl;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

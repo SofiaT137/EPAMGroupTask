@@ -14,7 +14,6 @@ public class Controller {
     private static final Logger logger = LogManager.getLogger(Controller.class);
 
     private static final String APP_START = "App is running!";
-
     private static final String FUNCTIONS = "Function selection";
 
     public static void main(String[] args) {
