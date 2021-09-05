@@ -19,6 +19,7 @@ public interface UserService {
     void changeUserAge(int age) throws IllegalAgeException, UserNotActiveException;
     void changeUserEmail(String userEmail) throws IllegalEmailException, UserNotActiveException;
 
+    List<Ticket> getUsersTickets();
     List<Ticket> getAvailableTickets();
     List<Ticket> getAvailableForKidsTickets();
     List<Ticket> getTicketsByMovieName(String movieName);

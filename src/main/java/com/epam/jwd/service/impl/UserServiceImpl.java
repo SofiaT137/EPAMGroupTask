@@ -148,4 +148,9 @@ public class UserServiceImpl implements UserService {
     public void signOut() {
         user.setActive(false);
     }
+
+    @Override
+    public List<Ticket> getUsersTickets() {
+        return user.getTickets();
+    }
 }
