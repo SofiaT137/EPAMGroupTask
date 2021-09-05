@@ -15,8 +15,9 @@ import com.epam.jwd.service.validation.UserValidation;
 
 import java.util.List;
 
-import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static com.epam.jwd.service.validation.UserValidation.isEmail;
 
 
 public class UserServiceImpl implements UserService {
@@ -29,7 +30,6 @@ public class UserServiceImpl implements UserService {
     private final UserRepository<Long, User> userRepository = UserRepositoryImpl.getInstance();
     private final TicketRepository<Long, Ticket> ticketRepository = TicketRepositoryImpl.getInstance();
 
-    private static final String EMAIL_PATTERN = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
     private static final String NO_CASH_EXCEPTION_MESSAGE = "There is no money in your pocket to buy this ticket";
     private static final String ILLEGAL_NAME_SIZE_EXCEPTION_MESSAGE = "Name must be 1 or more symbols long";
     private static final String ILLEGAL_AGE_EXCEPTION_MESSAGE = "Age should be above 0";
@@ -40,7 +40,6 @@ public class UserServiceImpl implements UserService {
     private User user;
 
     @Override
-
     public void registration(User user) throws UserNotFoundException, UnavailableSaveUserException {
         userRepository.save(user);
         this.user = userRepository.findUser(user).orElseThrow(() ->
@@ -57,7 +56,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-
     public void changeUserName(String userName) throws IllegalNameSizeException, UserNotActiveException {
         if (!user.isActive()) {
             throw new UserNotActiveException(NOT_ACTIVE_MESSAGE);
@@ -69,13 +67,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-
     public void changeUserAge(int age) throws IllegalAgeException, UserNotActiveException {
         if (!user.isActive()) {
             throw new UserNotActiveException(NOT_ACTIVE_MESSAGE);
         }
   
-       if(!UserValidation.isPositiveAge(age)){
+       if(!UserValidation.isValidAge(age)){
             throw new IllegalAgeException(ILLEGAL_AGE_EXCEPTION_MESSAGE);
         }
         user.setAge(age);
@@ -86,7 +83,7 @@ public class UserServiceImpl implements UserService {
         if (!user.isActive()) {
             throw new UserNotActiveException(NOT_ACTIVE_MESSAGE);
         }
-        if(!userEmail.matches(EMAIL_PATTERN)){
+        if(!isEmail(userEmail)){
             throw new IllegalEmailException(ILLEGAL_EMAIL_EXCEPTION_MESSAGE);
         }
         user.setEmail(userEmail);

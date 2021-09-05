@@ -32,7 +32,7 @@ public class UserValidation {
         return true;
     }
 
-    public static boolean isPositiveAge(int age) throws IllegalAgeException {
+    public static boolean isValidAge(int age) throws IllegalAgeException {
         if(age <= 0) {
             throw new IllegalAgeException(ILLEGAL_AGE_EXCEPTION_MESSAGE);
         }

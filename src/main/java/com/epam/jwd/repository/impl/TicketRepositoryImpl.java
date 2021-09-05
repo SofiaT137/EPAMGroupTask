@@ -15,7 +15,10 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
     private static TicketRepositoryImpl instance;
     private final List<Ticket> ticketStorage = new ArrayList<>();
     private final static String UNAVAILABLE_SAVE_TICKET_EXCEPTION = "Can not save the ticket";
+    private final static String NO_FIND_MOVIE_EXCEPTION = "This film is not found";
 
+    private TicketRepositoryImpl() {
+    }
 
     public static TicketRepositoryImpl getInstance() {
         if (instance == null) {
@@ -68,9 +71,13 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
 
     @Override
     public Ticket findByMovieName(String movieName) throws NoFindMovieException {
-        return ticketStorage.stream()
-                .filter(ticket -> movieName.equals(ticket.getMovieName())
-                        && ticket.isAvailable())
+        Ticket ticket =  ticketStorage.stream()
+                .filter(tckt -> movieName.equals(tckt.getMovieName())
+                        && tckt.isAvailable())
                 .findFirst().orElse(null);
+        if (ticket == null){
+            throw new NoFindMovieException(NO_FIND_MOVIE_EXCEPTION);
+        }
+        return ticket;
     }
 }

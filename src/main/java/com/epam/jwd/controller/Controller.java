@@ -10,26 +10,12 @@ public class Controller {
     public static void main(String[] args) {
 
         SellerService service = new SellerServiceImpl();
-        try{
+        try {
             service.createUSAMovieTicketList();
             service.createRussianMovieTicketList();
             service.createFranceMovieTicketList();
-        }
-        catch (UnavailableSaveTicketException exception){
+        } catch (UnavailableSaveTicketException exception) {
             //TODO log
         }
-
-        int function;
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Choose function to access to:");
-
-//        while (scan.hasNextInt()){
-//            function = scan.nextInt();
-//            switch (function) {
-//                case 1 -> {
-//
-//                }
-//            }
-//        }
     }
 }
