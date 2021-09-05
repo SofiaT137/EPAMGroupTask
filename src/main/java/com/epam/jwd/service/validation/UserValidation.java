@@ -45,32 +45,49 @@ public class UserValidation {
         return true;
     }
 
-        public static boolean isValidName (String name) throws IllegalNameSizeException {
+        public static boolean isValidName (String name) {
             logger.log(Level.DEBUG, name);
 
             if (name.length() == 0) {
-                logger.log(Level.ERROR, INCORRECT_NAME);//TODO
+                logger.log(Level.ERROR, INCORRECT_NAME);
 
-                throw new IllegalNameSizeException(ILLEGAL_NAME_SIZE_EXCEPTION_MESSAGE);
+                try {
+                    throw new IllegalNameSizeException(ILLEGAL_NAME_SIZE_EXCEPTION_MESSAGE);
+                } catch (IllegalNameSizeException e) {
+                    logger.log(Level.ERROR, e);
+                }
             }
+
+            logger.log(Level.INFO, VALID_NAME);
+
             return true;
         }
 
-        public static boolean isValidAge ( int age) throws IllegalAgeException {
+        public static boolean isValidAge (int age) {
             logger.log(Level.DEBUG, age);
 
             if (age <= 0) {
                 logger.log(Level.ERROR, INCORRECT_AGE);
 
-                throw new IllegalAgeException(ILLEGAL_AGE_EXCEPTION_MESSAGE);
+                try {
+                    throw new IllegalAgeException(ILLEGAL_AGE_EXCEPTION_MESSAGE);
+                } catch (IllegalAgeException e) {
+                    logger.log(Level.ERROR, e);
+                }
             }
+
+            logger.log(Level.INFO, POSITIVE_AGE);
             return true;
         }
 
-    public static boolean isEmail(String email) throws IllegalEmailException {
+    public static boolean isEmail(String email) {
         if(!email.matches(EMAIL_PATTERN)) {
-            logger.log(Level.ERROR, INCORRECT_EMAIL);
-            throw new IllegalEmailException(ILLEGAL_EMAIL_EXCEPTION_MESSAGE);
+            logger.log(Level.INFO, INCORRECT_EMAIL);
+            try {
+                throw new IllegalEmailException(ILLEGAL_EMAIL_EXCEPTION_MESSAGE);
+            } catch (IllegalEmailException e) {
+                logger.log(Level.ERROR, e);
+            }
         }
         logger.log(Level.DEBUG, EMAIL);
         return true;

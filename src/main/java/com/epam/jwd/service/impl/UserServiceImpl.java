@@ -185,7 +185,7 @@ public class UserServiceImpl implements UserService {
                 logger.log(Level.ERROR, e);
             }
         }
-        if(!TicketValidation.isAvailable(ticket)){
+        if(!TicketValidation.isAvailable(ticket)) {
             try {
                 throw new UnavailableTicketException(UNAVAILABLE_TICKET_EXCEPTION);
             } catch (UnavailableTicketException e) {

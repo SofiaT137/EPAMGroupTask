@@ -37,6 +37,7 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
     public static TicketRepositoryImpl getInstance() {
         if (instance == null) {
             logger.log(Level.INFO, CHECK_FOR_NULL);
+
             instance = new TicketRepositoryImpl();
         }
 
@@ -46,6 +47,7 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
     @Override
     public void save(Ticket ticket)  {
         logger.log(Level.INFO, SAVED_TICKET);
+
         try{
             ticketStorage.add(ticket);
         }
