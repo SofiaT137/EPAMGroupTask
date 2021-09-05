@@ -14,18 +14,21 @@ public class TicketValidation {
     private static final Logger logger = LogManager.getLogger(TicketValidation.class);
 
     private static final String TICKET_ACCESS = "Ticket is available!";
-
     private static final String UNAVAILABLE_TICKET = "Ticket is available!";
 
-    public static boolean isAvailable(Ticket ticket) throws UnavailableTicketException {
+    public static boolean isAvailable(Ticket ticket) {
         if (ticket.isAvailable()) {
             logger.log(Level.INFO, TICKET_ACCESS);
 
             return true;
         }
 
-        logger.log(Level.ERROR, UNAVAILABLE_TICKET);
+        try {
+            throw new UnavailableTicketException(TICKET_UNAVAILABLE_EXCEPTION_MESSAGE);
+        } catch (UnavailableTicketException e) {
+            logger.log(Level.ERROR, UNAVAILABLE_TICKET);
+        }
 
-        throw new UnavailableTicketException(TICKET_UNAVAILABLE_EXCEPTION_MESSAGE);
+        return false;
     }
 }

@@ -27,23 +27,14 @@ public class UserServiceImpl implements UserService {
     private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
 
     private static final String USER_REGISTRATION = "User is registrated!";
-
     private static final String USER_BALANCE = "User balance will be checked!";
-
     private static final String OTHER_USER_NAME = "New username is valid and will be changed!";
-
     private static final String NORMAL_AGE = "Age isn't negative!";
-
     private static final String OTHER_USER_EMAIL = "New useremail is valid and will be changed!";
-
     private static final String TICKET_BUYING = "Ticket was bought!";
-
     private static final String TICKET_PRICE = "Ticket will be checked by the price!";
-
     private static final String MOVIE_NAME_ON_TICKET = "Tickets will be sorted by movie name!";
-
     private static final String USER_ACTIONS_IN = "User signed in!";
-
     private static final String USER_ACTIONS_OUT = "User signed out!";
 
     private User user;
@@ -67,41 +58,43 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void changeUserName(String userName) throws IllegalNameSizeException {
-        if(UserValidation.isValidName(userName)){
-            logger.log(Level.INFO, OTHER_USER_NAME);
-            logger.log(Level.DEBUG, userName);
+    public void changeUserName(String userName) {
+            if(UserValidation.isValidName(userName)){
+                logger.log(Level.INFO, OTHER_USER_NAME);
+                logger.log(Level.DEBUG, userName);
 
-            user.setName(userName);
-        }
+                user.setName(userName);
+            }
+
     }
 
     @Override
-    public void changeUserAge(int age) throws IllegalAgeException {
-        if(UserValidation.isPositiveAge(age)){
-            user.setAge(age);
+    public void changeUserAge(int age) {
+            if(UserValidation.isPositiveAge(age)) {
+                user.setAge(age);
 
-            logger.log(Level.INFO, NORMAL_AGE);
-            logger.log(Level.DEBUG, age);
-        }
+                logger.log(Level.INFO, NORMAL_AGE);
+                logger.log(Level.DEBUG, age);
+            }
     }
 
     @Override
-    public void changeUserEmail(String userEmail) throws IllegalEmailException {
-        if(UserValidation.isEmail(userEmail)){
-            user.setEmail(userEmail);
+    public void changeUserEmail(String userEmail) {
+            if(UserValidation.isEmail(userEmail)){
+                user.setEmail(userEmail);
 
-            logger.log(Level.INFO, OTHER_USER_EMAIL);
-            logger.log(Level.DEBUG, userEmail);
-        }
+                logger.log(Level.INFO, OTHER_USER_EMAIL);
+                logger.log(Level.DEBUG, userEmail);
+            }
+
     }
 
     @Override
-    public void buyTicket(String movieName)
-            throws UnavailableTicketException, NoCashException {
+    public void buyTicket(String movieName) {
         logger.log(Level.DEBUG, movieName);
 
         Ticket ticket = ticketRepository.findByMovieName(movieName);
+
 
         if (TicketValidation.isAvailable(ticket)
                 && UserValidation.isEnoughCash(user, ticket.getPrice())) {
@@ -109,6 +102,7 @@ public class UserServiceImpl implements UserService {
             ticketRepository.delete(ticket);
 
             logger.log(Level.INFO, TICKET_BUYING);
+
         }
     }
 

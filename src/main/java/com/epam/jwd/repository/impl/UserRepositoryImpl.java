@@ -14,15 +14,10 @@ public class UserRepositoryImpl implements UserRepository<Long, User> {
     private static final Logger logger = LogManager.getLogger(UserRepositoryImpl.class);
 
     private static final String CHECK_FOR_NULL = "Instance is null";
-
     private static final String SAVED_USER = "Ticket was saved!";
-
     private static final String ID_SORTING = "ID is searching";
-
     private static final String REMOVED_USER = "User was remove!";
-
     private static final String USERNAME_CHECK = "Username is searching!";
-
     private static final String USER_SEARCH = "User is being searched";
 
     private static UserRepositoryImpl instance;

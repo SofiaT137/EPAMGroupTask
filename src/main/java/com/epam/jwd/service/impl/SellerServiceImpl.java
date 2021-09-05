@@ -21,17 +21,11 @@ public class SellerServiceImpl implements SellerService {
     private static final Logger logger = LogManager.getLogger(SellerServiceImpl.class);
 
     private static final String USA_MOVIE_TICKETS = "List of USA movie tickets was created!";
-
     private static final String FRANCE_MOVIE_TICKETS = "List of France movie tickets was created!";
-
     private static final String RUSSIAN_MOVIE_TICKETS = "List of France movie tickets was created!";
-
     private static final String MOVIE_TICKETS = "List of movie tickets was created!";
-
     private static final String SAVE_TICKET = "Ticket was saved!";
-
     private static final String MOVIE_NAME_TICKET = "Ticket was deleted by movie name!";
-
     private static final String FULL_CINEMA_HALL = "Cinema hall was full";
 
 

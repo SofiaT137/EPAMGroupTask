@@ -16,17 +16,11 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
     private static final Logger logger = LogManager.getLogger(TicketRepositoryImpl.class);
 
     private static final String CHECK_FOR_NULL = "Instance is null";
-
     private static final String SAVED_TICKET = "Ticket was saved!";
-
     private static final String ID_SORTING = "ID is searched";
-
     private static final String REMOVED_TICKET = "Ticket was remove!";
-
     private static final String ALL_AVAILABLE_TICKETS = "All available tickets are searched!";
-
     private static final String ALL_AVAILABLE_TICKETS_FOR_KIDS = "All available tickets for kids are searched!";
-
     private static final String MOVIE_NAME = "Movie was found by movie name";
 
 
