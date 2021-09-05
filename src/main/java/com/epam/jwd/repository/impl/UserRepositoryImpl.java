@@ -1,10 +1,8 @@
 package com.epam.jwd.repository.impl;
 
 import com.epam.jwd.repository.api.UserRepository;
-import com.epam.jwd.repository.exception.UnavailableSaveTicketException;
 import com.epam.jwd.repository.exception.UnavailableSaveUserException;
 import com.epam.jwd.repository.model.User;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,10 +20,10 @@ public class UserRepositoryImpl implements UserRepository<Long, User> {
     private static final String REMOVED_USER = "User was remove!";
     private static final String USERNAME_CHECK = "Username is searching!";
     private static final String USER_SEARCH = "User is being searched";
+    private static final String UNAVAILABLE_SAVE_USER_EXCEPTION = "Can not save the user";
 
     private static UserRepositoryImpl instance;
     private final List<User> userStorage = new ArrayList<>();
-    private final static String UNAVAILABLE_SAVE_USER_EXCEPTION = "Can not save the user";
 
     private UserRepositoryImpl() {
     }

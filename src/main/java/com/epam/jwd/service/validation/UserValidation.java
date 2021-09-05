@@ -11,16 +11,13 @@ import org.apache.logging.log4j.Logger;
 
 public class UserValidation {
 
+    private static final Logger logger = LogManager.getLogger(UserValidation.class);
+
     private static final String EMAIL_PATTERN = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
     private static final String NO_CASH_EXCEPTION_MESSAGE = "There is no money in your pocket to buy this ticket";
     private static final String ILLEGAL_NAME_SIZE_EXCEPTION_MESSAGE = "Name must be 1 or more symbols long";
     private static final String ILLEGAL_AGE_EXCEPTION_MESSAGE = "Age should be above 0";
     private static final String ILLEGAL_EMAIL_EXCEPTION_MESSAGE = "Enter valid email address";
-    private static final int MAX_NAME_LENGTH = 30;
-    private static final int MAX_AGE = 125;
-
-    private static final Logger logger = LogManager.getLogger(UserValidation.class);
-
     private static final String CASH = "The cash is enough!";
     private static final String VALID_NAME = "The name is valid!";
     private static final String POSITIVE_AGE = "The age is positive!";
