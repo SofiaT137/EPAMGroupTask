@@ -3,7 +3,6 @@ package com.epam.jwd.service.validation;
 import com.epam.jwd.repository.model.Ticket;
 import com.epam.jwd.service.exception.UnavailableTicketException;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,7 +17,7 @@ public class TicketValidation {
 
     public static boolean isAvailable(Ticket ticket) {
         if (ticket.isAvailable()) {
-            logger.log(Level.INFO, TICKET_ACCESS);
+            logger.info(TICKET_ACCESS);
 
             return true;
         }
@@ -26,7 +25,7 @@ public class TicketValidation {
         try {
             throw new UnavailableTicketException(TICKET_UNAVAILABLE_EXCEPTION_MESSAGE);
         } catch (UnavailableTicketException e) {
-            logger.log(Level.ERROR, UNAVAILABLE_TICKET);
+            logger.error(UNAVAILABLE_TICKET, e);
         }
 
         return false;

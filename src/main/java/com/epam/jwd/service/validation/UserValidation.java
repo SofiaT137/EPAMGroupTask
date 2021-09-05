@@ -34,11 +34,11 @@ public class UserValidation {
 
     public static boolean isEnoughCash(User user, double ticketCost)
             throws NoCashException {
-        logger.log(Level.DEBUG, ticketCost);
-        logger.log(Level.INFO, CASH);
+        logger.debug(ticketCost);
+        logger.info(CASH);
 
         if(user.getBalance() - ticketCost < 0) {
-            logger.log(Level.ERROR, INCORRECT_CASH);
+            logger.error(INCORRECT_CASH);
             throw new NoCashException(NO_CASH_EXCEPTION_MESSAGE);
 
         }
@@ -46,50 +46,50 @@ public class UserValidation {
     }
 
         public static boolean isValidName (String name) {
-            logger.log(Level.DEBUG, name);
+            logger.debug(name);
 
             if (name.length() == 0) {
-                logger.log(Level.ERROR, INCORRECT_NAME);
+                logger.error(INCORRECT_NAME);
 
                 try {
                     throw new IllegalNameSizeException(ILLEGAL_NAME_SIZE_EXCEPTION_MESSAGE);
                 } catch (IllegalNameSizeException e) {
-                    logger.log(Level.ERROR, e);
+                    logger.error(e);
                 }
             }
 
-            logger.log(Level.INFO, VALID_NAME);
+            logger.info(VALID_NAME);
 
             return true;
         }
 
         public static boolean isValidAge (int age) {
-            logger.log(Level.DEBUG, age);
+            logger.debug(age);
 
             if (age <= 0) {
-                logger.log(Level.ERROR, INCORRECT_AGE);
+                logger.error(INCORRECT_AGE);
 
                 try {
                     throw new IllegalAgeException(ILLEGAL_AGE_EXCEPTION_MESSAGE);
                 } catch (IllegalAgeException e) {
-                    logger.log(Level.ERROR, e);
+                    logger.error(e);
                 }
             }
 
-            logger.log(Level.INFO, POSITIVE_AGE);
+            logger.info(POSITIVE_AGE);
             return true;
         }
 
     public static boolean isEmail(String email) {
         if(!email.matches(EMAIL_PATTERN)) {
-            logger.log(Level.INFO, INCORRECT_EMAIL);
+            logger.info(INCORRECT_EMAIL);
             try {
                 throw new IllegalEmailException(ILLEGAL_EMAIL_EXCEPTION_MESSAGE);
             } catch (IllegalEmailException e) {
-                logger.log(Level.ERROR, e);
+                logger.error(e);
             }
         }
-        logger.log(Level.DEBUG, EMAIL);
+        logger.debug(EMAIL);
         return true;
     }
     }

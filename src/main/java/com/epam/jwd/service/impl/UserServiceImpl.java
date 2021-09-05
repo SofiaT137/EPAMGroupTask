@@ -57,18 +57,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registration(User user) {
-        logger.log(Level.INFO, USER_REGISTRATION);
+        logger.info(USER_REGISTRATION);
 
         try {
             userRepository.save(user);
         } catch (UnavailableSaveUserException e) {
-           logger.log(Level.ERROR, e);
+           logger.error(e);
         }
         try {
             this.user = userRepository.findUser(user).orElseThrow(() ->
                     new UserNotFoundException(NOT_FOUND_IN_REPOSITORY_MESSAGE));
         } catch (UserNotFoundException e) {
-            logger.log(Level.ERROR, e);
+            logger.error(e);
         }
         this.user.setActive(true);
 
@@ -80,11 +80,11 @@ public class UserServiceImpl implements UserService {
             try {
                 throw new UserNotActiveException(NOT_ACTIVE_MESSAGE);
             } catch (UserNotActiveException e) {
-                logger.log(Level.ERROR, e);
+                logger.error(e);
             }
         }
 
-        logger.log(Level.INFO, USER_BALANCE);
+        logger.info(USER_BALANCE);
 
         return user.getBalance();
     }
@@ -95,7 +95,7 @@ public class UserServiceImpl implements UserService {
             try {
                 throw new UserNotActiveException(NOT_ACTIVE_MESSAGE);
             } catch (UserNotActiveException e) {
-                logger.log(Level.ERROR, e);
+                logger.error(e);
             }
         }
         try {
@@ -103,11 +103,11 @@ public class UserServiceImpl implements UserService {
                throw new IllegalNameSizeException(ILLEGAL_NAME_SIZE_EXCEPTION_MESSAGE);
            }
         } catch (IllegalNameSizeException e) {
-            logger.log(Level.ERROR, e);
+            logger.error(e);
         }
 
-        logger.log(Level.INFO, OTHER_USER_NAME);
-        logger.log(Level.DEBUG, userName);
+        logger.info(OTHER_USER_NAME);
+        logger.debug(userName);
 
         user.setName(userName);
     }
@@ -118,7 +118,7 @@ public class UserServiceImpl implements UserService {
             try {
                 throw new UserNotActiveException(NOT_ACTIVE_MESSAGE);
             } catch (UserNotActiveException e) {
-                logger.log(Level.ERROR, e);
+                logger.error(e);
             }
         }
 
@@ -127,11 +127,11 @@ public class UserServiceImpl implements UserService {
                  throw new IllegalAgeException(ILLEGAL_AGE_EXCEPTION_MESSAGE);
              }
         } catch (IllegalAgeException e) {
-            logger.log(Level.ERROR, e);
+            logger.error(e);
         }
 
-        logger.log(Level.INFO, NORMAL_AGE);
-        logger.log(Level.DEBUG, age);
+        logger.info(NORMAL_AGE);
+        logger.debug(age);
 
         user.setAge(age);
     }
@@ -142,7 +142,7 @@ public class UserServiceImpl implements UserService {
             try {
                 throw new UserNotActiveException(NOT_ACTIVE_MESSAGE);
             } catch (UserNotActiveException e) {
-                logger.log(Level.ERROR, e);
+                logger.error(e);
             }
         }
         try {
@@ -150,24 +150,24 @@ public class UserServiceImpl implements UserService {
                 throw new IllegalEmailException(ILLEGAL_EMAIL_EXCEPTION_MESSAGE);
             }
         } catch (IllegalEmailException e) {
-            logger.log(Level.ERROR, e);
+            logger.error(e);
         }
 
-        logger.log(Level.INFO, OTHER_USER_EMAIL);
-        logger.log(Level.DEBUG, userEmail);
+        logger.info(OTHER_USER_EMAIL);
+        logger.debug(userEmail);
 
         user.setEmail(userEmail);
     }
 
     @Override
     public void buyTicket(String movieName) {
-        logger.log(Level.DEBUG, movieName);
+        logger.debug(movieName);
 
         if (!user.isActive()) {
             try {
                 throw new UserNotActiveException(NOT_ACTIVE_MESSAGE);
             } catch (UserNotActiveException e) {
-                logger.log(Level.ERROR, e);
+                logger.error(e);
             }
         }
 
@@ -175,21 +175,21 @@ public class UserServiceImpl implements UserService {
         try {
             ticket = ticketRepository.findByMovieName(movieName);
         } catch (NoFindMovieException e) {
-            logger.log(Level.ERROR, e);
+            logger.error(e);
         }
 
         if (ticket == null){
             try {
                 throw new NoFindMovieException(NO_FIND_MOVIE_EXCEPTION);
             } catch (NoFindMovieException e) {
-                logger.log(Level.ERROR, e);
+                logger.error(e);
             }
         }
         if(!TicketValidation.isAvailable(ticket)) {
             try {
                 throw new UnavailableTicketException(UNAVAILABLE_TICKET_EXCEPTION);
             } catch (UnavailableTicketException e) {
-                logger.log(Level.ERROR, e);
+                logger.error(e);
             }
         }
         try {
@@ -197,12 +197,12 @@ public class UserServiceImpl implements UserService {
                 throw new NoCashException(NO_CASH_EXCEPTION_MESSAGE);
             }
         } catch (NoCashException e) {
-            logger.log(Level.ERROR, e);
+            logger.error(e);
         }
         user.addTicket(ticket);
         ticketRepository.delete(ticket);
 
-        logger.log(Level.INFO, TICKET_BUYING);
+        logger.info(TICKET_BUYING);
     }
 
     @Override
@@ -211,18 +211,18 @@ public class UserServiceImpl implements UserService {
         try {
             ticket = ticketRepository.findByMovieName(movieName);
         } catch (NoFindMovieException e) {
-            logger.log(Level.ERROR, e);
+            logger.error(e);
         }
         if (ticket == null){
             try {
                 throw new NoFindMovieException(NO_FIND_MOVIE_EXCEPTION);
             } catch (NoFindMovieException e) {
-                logger.log(Level.ERROR, e);
+                logger.error(e);
             }
         }
 
-        logger.log(Level.INFO, TICKET_PRICE);
-        logger.log(Level.DEBUG, movieName);
+        logger.info(TICKET_PRICE);
+        logger.debug(movieName);
 
         return ticket.getPrice();
     }
@@ -239,8 +239,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Ticket> getTicketsByMovieName(String movieName) {
-        logger.log(Level.INFO, MOVIE_NAME_ON_TICKET);
-        logger.log(Level.DEBUG, movieName);
+        logger.info(MOVIE_NAME_ON_TICKET);
+        logger.debug(movieName);
 
         return ticketRepository.findAllAvailable().stream()
                 .filter(movie -> movie.getMovieName().equals(movieName))
@@ -249,14 +249,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void signIn(String userName) {
-        logger.log(Level.INFO, USER_ACTIONS_IN);
-        logger.log(Level.DEBUG, userName);
+        logger.info(USER_ACTIONS_IN);
+        logger.debug(userName);
 
         try {
             this.user = userRepository.findByUserName(userName).orElseThrow(() ->
                     new UserNotFoundException(NOT_FOUND_USERNAME_MESSAGE + userName));
         } catch (UserNotFoundException e) {
-            logger.log(Level.ERROR, e);
+            logger.error(e);
         }
         user.setActive(true);
     }
@@ -265,7 +265,7 @@ public class UserServiceImpl implements UserService {
     public void signOut() {
         user.setActive(false);
 
-        logger.log(Level.INFO, USER_ACTIONS_OUT);
+        logger.info(USER_ACTIONS_OUT);
     }
 
     @Override
