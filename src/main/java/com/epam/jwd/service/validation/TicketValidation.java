@@ -2,7 +2,7 @@ package com.epam.jwd.service.validation;
 
 import com.epam.jwd.repository.model.Ticket;
 import com.epam.jwd.service.exception.UnavailableTicketException;
-import com.epam.jwd.service.logic.KeyGenerator;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
