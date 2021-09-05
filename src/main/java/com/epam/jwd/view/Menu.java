@@ -1,6 +1,5 @@
 package com.epam.jwd.view;
 
-import com.epam.jwd.controller.Actions;
 import com.epam.jwd.repository.model.Ticket;
 import com.epam.jwd.repository.model.User;
 
