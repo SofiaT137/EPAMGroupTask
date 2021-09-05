@@ -61,6 +61,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public double checkBalance(String userName) {
         logger.log(Level.INFO, USER_BALANCE);
+        logger.log(Level.DEBUG, userName);
 
         return user.getBalance();
     }
@@ -69,6 +70,7 @@ public class UserServiceImpl implements UserService {
     public void changeUserName(String userName) throws IllegalNameSizeException {
         if(UserValidation.isValidName(userName)){
             logger.log(Level.INFO, OTHER_USER_NAME);
+            logger.log(Level.DEBUG, userName);
 
             user.setName(userName);
         }
@@ -80,6 +82,7 @@ public class UserServiceImpl implements UserService {
             user.setAge(age);
 
             logger.log(Level.INFO, NORMAL_AGE);
+            logger.log(Level.DEBUG, age);
         }
     }
 
@@ -89,12 +92,15 @@ public class UserServiceImpl implements UserService {
             user.setEmail(userEmail);
 
             logger.log(Level.INFO, OTHER_USER_EMAIL);
+            logger.log(Level.DEBUG, userEmail);
         }
     }
 
     @Override
     public void buyTicket(String movieName)
             throws UnavailableTicketException, NoCashException {
+        logger.log(Level.DEBUG, movieName);
+
         Ticket ticket = ticketRepository.findByMovieName(movieName);
 
         if (TicketValidation.isAvailable(ticket)
@@ -109,6 +115,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public double checkTicketPrice(String movieName) {
         logger.log(Level.INFO, TICKET_PRICE);
+        logger.log(Level.DEBUG, movieName);
 
         return ticketRepository.findByMovieName(movieName)
                 .getPrice();
@@ -127,6 +134,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Ticket> getTicketsByMovieName(String movieName) {
         logger.log(Level.INFO, MOVIE_NAME_ON_TICKET);
+        logger.log(Level.DEBUG, movieName);
 
         return ticketRepository.findAllAvailable().stream()
                 .filter(movie -> movie.getMovieName().equals(movieName))
@@ -138,6 +146,7 @@ public class UserServiceImpl implements UserService {
         this.user = userRepository.findByUserName(userName);
 
         logger.log(Level.INFO, USER_ACTIONS_IN);
+        logger.log(Level.DEBUG, userName);
     }
 
     @Override

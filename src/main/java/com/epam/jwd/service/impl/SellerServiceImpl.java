@@ -65,6 +65,8 @@ public class SellerServiceImpl implements SellerService {
     private void createTicketList(List<Ticket> listOfTickets) {
         for (Ticket ticket : listOfTickets) {
             ticketRepository.save(ticket);
+
+            logger.log(Level.DEBUG, ticket);
         }
 
         logger.log(Level.INFO, MOVIE_TICKETS);
@@ -80,6 +82,8 @@ public class SellerServiceImpl implements SellerService {
         for (Ticket ticket : ticketRepository.findAll()) {
             if (ticket.getMovieName().equals(movieName)) {
                 ticketRepository.delete(ticket);
+
+                logger.log(Level.DEBUG, ticket);
             }
 
             logger.log(Level.INFO, MOVIE_NAME_TICKET);

@@ -51,6 +51,7 @@ public class UserRepositoryImpl implements UserRepository<Long, User> {
     @Override
     public User findById(Long id) {
         logger.log(Level.INFO, ID_SORTING);
+        logger.log(Level.DEBUG, id);
 
         return userStorage.stream()
                 .filter(user -> id.equals(user.getId()))
@@ -66,6 +67,7 @@ public class UserRepositoryImpl implements UserRepository<Long, User> {
     @Override
     public User findByUserName(String userName) {
         logger.log(Level.INFO, USERNAME_CHECK);
+        logger.log(Level.DEBUG, userName);
 
         return userStorage.stream()
                 .filter(user -> userName.equals(user.getName()))

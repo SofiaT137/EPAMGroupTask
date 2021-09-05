@@ -53,6 +53,8 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
     @Override
     public Ticket findById(Long id) {
         logger.log(Level.INFO, ID_SORTING);
+        logger.log(Level.DEBUG, id);
+
         return ticketStorage.stream()
                 .filter(ticket -> id.equals(ticket.getId()))
                 .findFirst()
@@ -69,6 +71,7 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
     @Override
     public List<Ticket> findAllAvailable() {
         logger.log(Level.INFO, ALL_AVAILABLE_TICKETS);
+
         return ticketStorage.stream()
                 .filter(Ticket::isAvailable)
                 .collect(Collectors.toList());
@@ -91,6 +94,7 @@ public class TicketRepositoryImpl implements TicketRepository<Long, Ticket> {
     @Override
     public Ticket findByMovieName(String movieName) {
         logger.log(Level.INFO, MOVIE_NAME);
+        logger.log(Level.DEBUG, movieName);
 
         return ticketStorage.stream()
                 .filter(ticket -> movieName.equals(ticket.getMovieName())

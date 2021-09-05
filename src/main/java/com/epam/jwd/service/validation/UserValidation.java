@@ -38,6 +38,8 @@ public class UserValidation {
 
     public static boolean isEnoughCash(User user, double ticketCost)
             throws NoCashException {
+        logger.log(Level.DEBUG, ticketCost);
+
         if(user.getBalance() - ticketCost >= 0) {
             logger.log(Level.INFO, CASH);
 
@@ -50,6 +52,8 @@ public class UserValidation {
     }
 
     public static boolean isValidName(String name) throws IllegalNameSizeException {
+        logger.log(Level.DEBUG, name);
+
         if(name.length() > 0) {
             logger.log(Level.INFO, VALID_NAME);
 
@@ -62,6 +66,8 @@ public class UserValidation {
     }
 
     public static boolean isPositiveAge(int age) throws IllegalAgeException {
+        logger.log(Level.DEBUG, age);
+
         if(age > 0) {
             logger.log(Level.DEBUG, POSITIVE_AGE);
 
@@ -74,6 +80,8 @@ public class UserValidation {
     }
 
     public static boolean isEmail(String email) throws IllegalEmailException {
+        logger.log(Level.DEBUG, email);
+
         if(email.matches(EMAIL_PATTERN)) {
             logger.log(Level.DEBUG, EMAIL);
 
