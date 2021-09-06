@@ -36,6 +36,25 @@ public class Menu {
     private static final String NOT_AVAILABLE_FOR_KIDS = "Not allowed for children";
     private static final String TICKETS_AVAILABLE = "Tickets available";
     private static final String TICKETS_NOT_AVAILABLE = "Tickets not available";
+    private static final String PERSON_NAME_ENTER = "Enter your name: ";
+    private static final String PERSON_NEW_NAME_ENTER = "Enter new name: ";
+    private static final String PERSON_NEW_EMAIL_ENTER = "Enter new email: ";
+    private static final String PERSON_BALANCE_ENTER = "Enter your balance: ";
+    private static final String PERSON_AGE_ENTER = "Enter your age: ";
+    private static final String PERSON_NEW_AGE_ENTER = "Enter new age: ";
+    private static final String PERSON_EMAIL_ENTER = "Enter your email: ";
+    private static final String SUCCESSFUL_REGISTRATION = ", you have successfully registered.";
+    private static final String SUCCESSFUL_NAME_CHANGE = "You have successfully changed your name";
+    private static final String SUCCESSFUL_AGE_CHANGE = "You have successfully changed your name";
+    private static final String SUCCESSFUL_EMAIL_CHANGE = "You have successfully changed your name";
+    private static final String HELLO = "Hello, ";
+    private static final String USER_NAME = "User name: ";
+    private static final String AGE = "Age: ";
+    private static final String EMAIL = "Email: ";
+    private static final String BALANCE = "Balance: ";
+    private static final String BYE_MESSAGE = "Bye, ";
+    private static final String SELECT_MOVIE_MESSAGE = "Select movie: ";
+    private static final String NO_TICKETS_MESSAGE = "No tickets purchased.";
 
     public static void getProfileSettingsMenu() {
         System.out.println(MENU_PROFILE_SETTINGS);
@@ -99,67 +118,67 @@ public class Menu {
     }
 
     public static void getMessageInputUserName() {
-        System.out.println("Enter your name: ");
+        System.out.println(PERSON_NAME_ENTER);
     }
 
     public static void getMessageInputBalance() {
-        System.out.println("Enter your balance: ");
+        System.out.println(PERSON_BALANCE_ENTER);
     }
 
     public static void getMessageInputAge() {
-        System.out.println("Enter your age: ");
+        System.out.println(PERSON_AGE_ENTER);
     }
 
     public static void getMessageInputEmail() {
-        System.out.println("Enter your email: ");
+        System.out.println(PERSON_EMAIL_ENTER);
     }
 
     public static void getMessageRegisteredSuccess(String userName) {
-        System.out.println(userName + ", you have successfully registered.");
+        System.out.println(userName + SUCCESSFUL_REGISTRATION);
     }
 
     public static void getMessageWelcome(String userName) {
-        System.out.println("Hello, " + userName);
+        System.out.println(HELLO + userName);
     }
 
     public static void getMessageChangeUserName() {
-        System.out.println("Enter new name: ");
+        System.out.println(PERSON_NEW_NAME_ENTER);
     }
 
     public static void getMessageChangeUserNameSuccess() {
-        System.out.println("You have successfully changed your name");
+        System.out.println(SUCCESSFUL_NAME_CHANGE);
     }
 
     public static void getMessageChangeAge() {
-        System.out.println("Enter new age: ");
+        System.out.println(PERSON_NEW_AGE_ENTER);
     }
 
     public static void getMessageChangeAgeSuccess() {
-        System.out.println("You have successfully changed your age");
+        System.out.println(SUCCESSFUL_AGE_CHANGE);
     }
 
     public static void getMessageChangeEmail() {
-        System.out.println("Enter new email: ");
+        System.out.println(PERSON_NEW_EMAIL_ENTER);
     }
 
     public static void getMessageChangeEmailSuccess() {
-        System.out.println("You have successfully changed your email");
+        System.out.println(SUCCESSFUL_EMAIL_CHANGE);
     }
 
     public static void getMessageUserName(String userName) {
-        System.out.println("User name: " + userName);
+        System.out.println(USER_NAME + userName);
     }
 
     public static void getMessageAge(int age) {
-        System.out.println("Age: " + age);
+        System.out.println(AGE + age);
     }
 
     public static void getMessageEmail(String email) {
-        System.out.println("Email: " + email);
+        System.out.println(EMAIL + email);
     }
 
     public static void getMessageBalance(double balance) {
-        System.out.println("Balance: " + balance);
+        System.out.println(BALANCE + balance);
     }
 
     public static void getInfoUser(User user) {
@@ -170,15 +189,15 @@ public class Menu {
     }
 
     public static void getMessageGoodbye(String userName) {
-        System.out.println("Bye, " + userName);
+        System.out.println(BYE_MESSAGE + userName);
     }
 
     public static void getMessageSelectTicket() {
-        System.out.println("Select movie: ");
+        System.out.println(SELECT_MOVIE_MESSAGE);
     }
 
     public static void getMessageNotTickets() {
-        System.out.println("No tickets purchased.");
+        System.out.println(NO_TICKETS_MESSAGE);
     }
 
     public static void getUserTickets(List<Ticket> tickets) {
