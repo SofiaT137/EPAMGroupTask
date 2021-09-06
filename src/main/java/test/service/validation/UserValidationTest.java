@@ -1,7 +1,5 @@
 package test.service.validation;
 
-import com.epam.jwd.service.exception.IllegalEmailException;
-import com.epam.jwd.service.exception.IllegalNameSizeException;
 import com.epam.jwd.service.validation.UserValidation;
 import org.junit.jupiter.api.Test;
 
@@ -13,26 +11,25 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserValidationTest {
 
     @Test
-    void shouldValidateNameWhenTheNameIsValid() throws IllegalNameSizeException {
+    void shouldValidateNameWhenTheNameIsValid() {
         String name = "Vasily";
         assertTrue(UserValidation.isValidName(name));
     }
 
     @Test
-    void shouldThrowIllegalNameSizeExceptionWhenTheNameIsShort() {
+    void shouldNotValidateNameWhenTheNameIsShort() {
         String name = "";
-        assertThrows(IllegalNameSizeException.class,
-                () -> UserValidation.isValidName(name));
+        assertFalse(UserValidation.isValidName(name));
     }
 
     @Test
-    void shouldValidateEmailWhenTheEmailIsValid() throws IllegalEmailException {
+    void shouldValidateEmailWhenTheEmailIsValid() {
         String email = "jack@mail.ru";
         assertTrue(UserValidation.isEmail(email));
     }
 
     @Test
-    void shouldThrowIllegalEmailExceptionWhenTheEmailIsInvalid() {
+    void shouldNotValidateEmailWhenTheEmailIsInvalid() {
         List<String> notEmails = Arrays.asList(
                 "",
                 "aaaaaa",
@@ -41,8 +38,7 @@ class UserValidationTest {
                 "@."
         );
         for (String invalidEmail : notEmails) {
-            assertThrows(IllegalEmailException.class,
-                    () -> UserValidation.isEmail(invalidEmail));
+            assertFalse(UserValidation.isEmail(invalidEmail));
         }
     }
 }
