@@ -50,6 +50,7 @@ public class UserRepositoryImpl implements UserRepository<Long, User> {
 
     @Override
     public boolean delete(User user) {
+
         return userStorage.remove(user);
     }
 

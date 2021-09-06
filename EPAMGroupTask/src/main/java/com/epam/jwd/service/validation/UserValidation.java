@@ -16,7 +16,7 @@ public class UserValidation {
 
     public static boolean isEnoughCash(User user, double ticketCost)
             throws NoCashException {
-        if(user.getBalance() - ticketCost >= 0) {
+        if (user.getBalance() - ticketCost >= 0) {
             return true;
         }
 
@@ -24,7 +24,7 @@ public class UserValidation {
     }
 
     public static boolean isValidName(String name) throws IllegalNameSizeException {
-        if(name.length() > 0) {
+        if (name.length() > 0) {
             return true;
         }
 
@@ -32,7 +32,7 @@ public class UserValidation {
     }
 
     public static boolean isPositiveAge(int age) throws IllegalAgeException {
-        if(age > 0) {
+        if (age > 0) {
             return true;
         }
 
@@ -40,7 +40,7 @@ public class UserValidation {
     }
 
     public static boolean isEmail(String email) throws IllegalEmailException {
-        if(email.matches(EMAIL_PATTERN)) {
+        if (email.matches(EMAIL_PATTERN)) {
             return true;
         }
 
