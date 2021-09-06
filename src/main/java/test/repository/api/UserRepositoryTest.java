@@ -1,11 +1,11 @@
 package test.repository.api;
 
-import com.epam.jwd.repository.exception.UnavailableSaveUserException;
 import com.epam.jwd.repository.impl.UserRepositoryImpl;
 import com.epam.jwd.repository.model.User;
 import org.junit.jupiter.api.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,7 +24,7 @@ class UserRepositoryTest {
     }
 
     @BeforeEach
-    void setUp() throws UnavailableSaveUserException {
+    void setUp() {
         user = new User(ID, NAME, 100, 20, "jack@mail.ru", true);
         repository.save(user);
     }
@@ -36,23 +36,25 @@ class UserRepositoryTest {
 
     @Test
     void shouldFindUserByIdWhenIdExists() {
-        assertSame(user, repository.findById(ID));
+        assertTrue(repository.findById(ID).isPresent());
+        assertSame(user, repository.findById(ID).get());
     }
 
     @Test
-    void shouldReturnNullWhenIdDoesNotExist() {
+    void shouldReturnEmptyOptionalWhenIdDoesNotExist() {
         storage.clear();
-        assertNull(repository.findById(ID));
+        assertSame(Optional.empty(), repository.findById(ID));
     }
 
     @Test
     void shouldFindUserByNameWhenNameExists() {
-        assertSame(user, repository.findByUserName(NAME));
+        assertTrue(repository.findByUserName(NAME).isPresent());
+        assertSame(user, repository.findByUserName(NAME).get());
     }
 
     @Test
-    void shouldReturnNullWhenNameDoesNotExist() {
+    void shouldReturnEmptyOptionalWhenNameDoesNotExist() {
         storage.clear();
-        assertNull(repository.findByUserName(NAME));
+        assertSame(Optional.empty(), repository.findByUserName(NAME));
     }
 }

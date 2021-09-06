@@ -1,15 +1,9 @@
 package test.service.api;
 
-import com.epam.jwd.repository.exception.NoFindMovieException;
-import com.epam.jwd.repository.exception.UnavailableSaveUserException;
 import com.epam.jwd.repository.impl.TicketRepositoryImpl;
 import com.epam.jwd.repository.impl.UserRepositoryImpl;
 import com.epam.jwd.repository.model.Ticket;
 import com.epam.jwd.repository.model.User;
-import com.epam.jwd.service.exception.NoCashException;
-import com.epam.jwd.service.exception.UnavailableTicketException;
-import com.epam.jwd.service.exception.UserNotActiveException;
-import com.epam.jwd.service.exception.UserNotFoundException;
 import com.epam.jwd.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +27,7 @@ class UserServiceTest {
     }
 
     @BeforeEach
-    void setUp() throws UserNotFoundException, UnavailableSaveUserException {
+    void setUp() {
         service = new UserServiceImpl();
         validUser = new User(0L, "Jack", 100, 20, "jack@mail.ru", true);
         service.registration(validUser);
@@ -46,38 +40,39 @@ class UserServiceTest {
     }
 
     @Test
-    void shouldBuyTicketWhenTheFilmExistsAndEnoughCash()
-            throws UnavailableTicketException, NoCashException, UserNotActiveException, NoFindMovieException {
+    void shouldBuyTicketWhenTheFilmExistsAndEnoughCash() {
         String filmName = "Titanic";
         double price = 14.00;
         double expectedCash = validUser.getBalance() - price;
         Ticket ticket =
                 new Ticket(0L, filmName, "Melodrama", price, true, true);
         ticketStorage.add(ticket);
-        User currentUser = userStorage.get(0);
         service.buyTicket(filmName);
         assertEquals(0, ticketStorage.size());
         assertSame(ticket, validUser.getTickets().remove(0));
-        assertEquals(0, Double.compare(expectedCash, validUser.getBalance()),
+        assertEquals(expectedCash, validUser.getBalance(),
                 "Money should decrease, when buying");
     }
 
     @Test
-    void shouldThrowUnavailableTicketExceptionWhenTheFilmDoesNotExist() {
+    void shouldThrowNullPointerExceptionWhenTheFilmDoesNotExist() {
         String filmName = "Titanic";
-        assertThrows(UnavailableTicketException.class,
+        assertThrows(NullPointerException.class,
                 () -> service.buyTicket(filmName));
     }
 
     @Test
-    void shouldThrowNoCashExceptionWhenTheUserDoesNotHaveEnoughCash() throws UserNotFoundException, UnavailableSaveUserException {
+    void shouldNotBuyTicketWhenTheUserDoesNotHaveEnoughCash() {
         User poorUser = new User(0L, "Jack", 0, 20, "jack@mail.ru", true);
         service.registration(poorUser);
         String filmName = "Titanic";
         Ticket ticket =
                 new Ticket(0L, filmName, "Melodrama", 14.00, true, true);
         ticketStorage.add(ticket);
-        assertThrows(NoCashException.class,
-                () -> service.buyTicket(filmName));
+        service.buyTicket(filmName);
+        assertEquals(0, poorUser.getTickets().size(),
+                "User should have no tickets");
+        assertSame(ticket, ticketStorage.remove(0),
+                "Ticket should stay in storage");
     }
 }
