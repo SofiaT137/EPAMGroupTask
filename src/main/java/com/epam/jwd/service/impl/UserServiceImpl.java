@@ -187,6 +187,7 @@ public class UserServiceImpl implements UserService {
             }
             user.addTicket(ticket);
             ticketRepository.delete(ticket);
+            user.setBalance(user.getBalance() - ticket.getPrice());
         } catch (NoCashException e) {
             logger.error(e);
         }

@@ -51,6 +51,7 @@ public class UserValidation {
                 throw new IllegalNameSizeException(ILLEGAL_NAME_SIZE_EXCEPTION_MESSAGE);
             } catch (IllegalNameSizeException e) {
                 logger.error(e);
+                return false;
             }
         }
 
@@ -83,6 +84,7 @@ public class UserValidation {
                 throw new IllegalEmailException(ILLEGAL_EMAIL_EXCEPTION_MESSAGE);
             } catch (IllegalEmailException e) {
                 logger.error(e);
+                return false;
             }
         }
         logger.debug(EMAIL);
