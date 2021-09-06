@@ -6,14 +6,13 @@ import com.epam.jwd.service.exception.IllegalAgeException;
 import com.epam.jwd.service.exception.IllegalEmailException;
 import com.epam.jwd.service.exception.IllegalNameSizeException;
 import com.epam.jwd.service.exception.NoCashException;
-import com.epam.jwd.service.exception.UnavailableTicketException;
 
 import java.util.List;
 
 public interface UserService {
 
     void registration(User user);
-    void buyTicket(String movieName) throws UnavailableTicketException, NoCashException;
+    void buyTicket(String movieName) throws NoCashException;
     double checkTicketPrice(String movieName);
     double checkBalance();
     void changeUserName(String userName) throws IllegalNameSizeException;
