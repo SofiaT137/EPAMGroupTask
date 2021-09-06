@@ -185,11 +185,11 @@ public class UserServiceImpl implements UserService {
             if (!UserValidation.isEnoughCash(user, ticket.getPrice())) {
                 throw new NoCashException(NO_CASH_EXCEPTION_MESSAGE);
             }
+            user.addTicket(ticket);
+            ticketRepository.delete(ticket);
         } catch (NoCashException e) {
             logger.error(e);
         }
-        user.addTicket(ticket);
-        ticketRepository.delete(ticket);
 
         logger.info(TICKET_BUYING);
     }
