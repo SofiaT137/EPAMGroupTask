@@ -1,7 +1,5 @@
 package test.repository.api;
 
-import com.epam.jwd.repository.exception.NoFindMovieException;
-import com.epam.jwd.repository.exception.UnavailableSaveTicketException;
 import com.epam.jwd.repository.impl.TicketRepositoryImpl;
 import com.epam.jwd.repository.model.Ticket;
 import org.junit.jupiter.api.AfterEach;

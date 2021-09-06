@@ -1,6 +1,5 @@
 package test.repository.api;
 
-import com.epam.jwd.repository.exception.UnavailableSaveUserException;
 import com.epam.jwd.repository.impl.UserRepositoryImpl;
 import com.epam.jwd.repository.model.User;
 import org.junit.jupiter.api.*;

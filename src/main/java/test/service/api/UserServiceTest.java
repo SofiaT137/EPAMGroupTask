@@ -1,11 +1,9 @@
 package test.service.api;
 
-import com.epam.jwd.repository.exception.UnavailableSaveUserException;
 import com.epam.jwd.repository.impl.TicketRepositoryImpl;
 import com.epam.jwd.repository.impl.UserRepositoryImpl;
 import com.epam.jwd.repository.model.Ticket;
 import com.epam.jwd.repository.model.User;
-import com.epam.jwd.service.exception.UserNotFoundException;
 import com.epam.jwd.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
